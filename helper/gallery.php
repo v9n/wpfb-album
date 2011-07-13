@@ -18,19 +18,18 @@ class WfalbumHelperGallery {
         return new WfalbumHelperGallery . ucfirst($driver);
     }
     
-    public function shortcode() {
-        
-    }
-}
-
-interface iWfalbumHelperGallery {
     /**
-     * Each gallery plugin must implement this function to render html content
+     * Handle and parse shortcod!
+     * This function parses shortcode, then load correct driver to parse shortcode
      */
-    public function render();
+    static public function shortcode() {
+    }
     
     /**
-     * Each gallery plugin must implement this function to add custom css, javascript
+     * Plugin can overwrite this funciton load addtional resources (script, style)! For example, each plugin has its own style and script..
      */
-    public function bootstrap();
+    public function bootstrap() { 
+        
+    }
+    
 }
