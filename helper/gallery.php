@@ -5,6 +5,7 @@
  *  by Vincent Nguyen <info@axcoto.com>
  */
 class WfalbumHelperGallery {
+    
     /**
      *
      * @global Wfalbum $wpfb_album
@@ -19,13 +20,24 @@ class WfalbumHelperGallery {
     }
     
     /**
+     *
+     * @global Wfalbum $wpfb_album 
+     */
+    protected function url($name) {
+        global $wpfb_album;
+        return $wpfb_album->pluginUrl . 'helper/' . $name;
+    }
+    
+    /**
      * Handle and parse shortcod!
      * This function parses shortcode, then load correct driver to parse shortcode
      */
     static public function shortcode($atts, $content=null, $code="" ) {
-        var_dump($atts);
-        var_dump($content);
-        var_dump($code);
+        $album_id = WfalbumHelperCore::g($atts['id'], null);
+        if ($album_id) {
+            //Load photo of album then pass to driver
+            
+        }
     }
     
     /**
