@@ -5,11 +5,11 @@
  *  by Vincent Nguyen <info@axcoto.com>
  */
 
-class WfalbumHelpGalleryGalleria extends WfalbumHelperGallery implements iWfalbumHelperGallery{
+class WfalbumHelpGallerySample extends WfalbumHelperGallery {
     static public function info() {
         return array(
-            'id' => 'Galleria',
-            'name' => 'jQuery Galleria'
+            'id' => 'Sample',
+            'name' => 'Sample'
         );
     }
     

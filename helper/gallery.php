@@ -22,7 +22,10 @@ class WfalbumHelperGallery {
      * Handle and parse shortcod!
      * This function parses shortcode, then load correct driver to parse shortcode
      */
-    static public function shortcode() {
+    static public function shortcode($atts, $content=null, $code="" ) {
+        var_dump($atts);
+        var_dump($content);
+        var_dump($code);
     }
     
     /**
