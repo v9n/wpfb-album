@@ -1,3 +1,3 @@
 # Personal Prj #
 
-Use at ur own risk
+This is going to use as my plugin template for next project at Axcoto!
