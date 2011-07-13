@@ -33,9 +33,28 @@ class WfalbumFrontController {
                 echo $e->getMessage();
             }
         }
-        
     }
-    
-    
+
+    /**
+     * In order to reduce procedure for setting up a Facebook application on client (it can be very hard for some of client), I think of
+     * an other way for this! I will set up a central facebook app to server for all clients!
+     * Each client (who bought and use this plugin) need to authorized my facebook app and give my facebook app two permisson: offline_access, 
+     * and user_photo! After user authorized my app, my app then ping to site of client at url
+     * /wfalbum/save_token/{user_id_on_wordpress}/access_token
+     * This url is handle by my plugin: wfalbum! It then save this access_token! 
+     * Because this is an offline_access token so I can used it later in my plugin to gather information about user photo
+     * 
+     * @global wpdb $wpdb;
+     * @global Wfalbum $wpfb_album
+     * @param $user_id id of user on WordPress! When user get redirecting to my facebook app to authorize, this user_id will be passed to my facebook app too!
+     */
+    public function action_save_token($user_id, $access_token) {
+        global $wpdb, $wpfb_album;
+        if (update_user_meta($user_id, 'wfalbum_access_token', $access_token)) {
+            echo 'success';
+        } else {
+            echo 'fail';
+        }
+    }
 
 }
