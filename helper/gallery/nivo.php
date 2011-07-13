@@ -5,7 +5,7 @@
  *  by Vincent Nguyen <info@axcoto.com>
  */
 
-class WfalbumHelpGalleryNivo extends WfalbumHelperGallery {
+class WfalbumHelperGalleryNivo extends WfalbumHelperGallery {
     static public function info() {
         return array(
             'id' => 'Nivo',
@@ -17,7 +17,7 @@ class WfalbumHelpGalleryNivo extends WfalbumHelperGallery {
         
     }
     
-    public function bootstrap() {
+    static public function bootstrap() {
         ;
     }
 }
