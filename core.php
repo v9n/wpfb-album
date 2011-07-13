@@ -206,6 +206,10 @@ class Wfalbum {
     public function uri($page, $uri) {
         return 'admin.php?page=Wfalbum/' . $page . '&uri=Wfalbum/' . $uri;
     }
+    
+    public function url($file) {
+        return $this->pluginUrl . $file;
+    }
 
     static private $_self = null;
     const VERSION = '1.0';
