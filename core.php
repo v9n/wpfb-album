@@ -14,7 +14,7 @@ include 'filter/core.php';
 include 'widget/core.php';
 include 'model/core.php';
 include 'helper/core.php';
-
+        
 class Wfalbum {
 
     public function __construct() {
@@ -136,9 +136,9 @@ class Wfalbum {
     public function handleFrontendAction() {
         global $wp_query;
         $query = $wp_query->query;
-        $pagename = $query['pagename'];
-        $uri = $query['axcotouri'];
-
+        $pagename = WfalbumHelperCore::g($query['pagename'], null);
+        $uri = WfalbumHelperCore::g($query['axcotouri'], null);
+        
         if ($pagename == $this->routerPrefix) {
             $this->execute($uri, 'frontend/');
         }
