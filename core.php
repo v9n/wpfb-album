@@ -22,7 +22,9 @@ class Wfalbum {
         $this->pluginName = dirname(plugin_basename(__FILE__));
         $this->pluginUrl = WP_PLUGIN_URL . "/$this->pluginName/";
         $this->pluginPath = WP_PLUGIN_DIR . "/$this->pluginName/";
-        
+    }
+    
+    public function init() {
         Axche::init(array('dir' => $this->pluginPath . 'cache/'));
         /**
          * Handle shortcode! 
@@ -194,8 +196,12 @@ class Wfalbum {
      * @return Wfalbum
      */
     static public function singleton() {
+        static $i=10;
+        echo $i++;
         if (!self::$_self) {
+            echo 'tao';
             self::$_self = new Wfalbum();
+            self::$_self->init();
         }
         return self::$_self;
     }
