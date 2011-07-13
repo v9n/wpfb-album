@@ -10,23 +10,7 @@ class WfalbumOptionCore {
         //Setting Option
         $optionName = Wfalbum::singleton()->optionName;
         $defaultOption = array(
-            'pp_email' => '',
-            'pp_api_username' => '',
-            'pp_api_password' => '',
-            'pp_api_sig' => '',
-            'pp_sandbox' => '',
-            'pp_sb_email' => '',
-            'pp_sb_api_username' => '',
-            'pp_sb_api_password' => '',
-            'pp_sb_api_sig' => '',
-            'pp_debug_email' => '',
-            'download_experid_period',
-            'download_max_download' => '',
-            'download_membership_cost' => '',
-            
-            'download_email_subject' => '',
-            'download_email_body' => '',
-            
+            'fp_cache_time' => 5000,
         );
         $option = get_option($optionName, false);
         if (!$option) {
@@ -36,9 +20,6 @@ class WfalbumOptionCore {
         //Use our own setting page
         register_setting($optionName . '_group', $optionName);
         add_settings_section($optionName . '_facebook', 'Facebook App Setting', array('WfalbumOptionCore', 'setting_overview_facebook'), 'wfalbum_facebook');
-        add_settings_field('fb_app_id', 'Facebook App ID/Key', array('WfalbumOptionCore', 'setting_control_fb_app_id'), 'wfalbum_facebook', $optionName . '_facebook');
-        add_settings_field('fp_app_secret', 'Facebook App Secret', array('WfalbumOptionCore', 'setting_control_fb_app_secret'), 'wfalbum_facebook', $optionName . '_facebook');
-        add_settings_field('fp_user_id', 'Facebook User Id', array('WfalbumOptionCore', 'setting_control_fb_user_id'), 'wfalbum_facebook', $optionName . '_facebook');
         add_settings_field('fp_cache_time', 'Cache Time', array('WfalbumOptionCore', 'setting_control_fp_cache_time'), 'wfalbum_facebook', $optionName . '_facebook');
         
         
