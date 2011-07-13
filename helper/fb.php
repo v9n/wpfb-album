@@ -44,7 +44,7 @@ class WfalbumHelperFb {
         global $wpfb_album;
         $option = get_option($wpfb_album->optionName);
         $this->conf = array(
-            'appname' => NULL, $option['canvas_url'],
+            'appname' => NULL, //$option['canvas_url'],
             //This is a human name which can appear on wall or something! It should be easy to memorize, space and special char is ok
             'friendlyname' => 'Axcoto\'s Event Voting',
             //List of facebook user who you want to let him/her edit questions
@@ -58,7 +58,7 @@ class WfalbumHelperFb {
             ),
             'scope' => 'user_photos,offline_access',
             'canvas' => array(
-                'url' => NULL, $option['fbapp_canvas_url'] . '/',
+                'url' => NULL, //$option['fbapp_canvas_url'] . '/',
                 'page' => 'https://apps.facebook.com/wpfbalbum/wp-admin/admin.php?page=wfalbum&noheader=true',
             )
         );
@@ -79,21 +79,23 @@ class WfalbumHelperFb {
         return $this->_api;
     }
 
-    public function getAlbums() {
-        if ($result = wp_cache_get('albums', 'wfalbums')) {
-            return $result;
+    
+    public function getAlbums($fuid='') {
+        if (!($albums = Axche::get('album_' . get_current_user_id(), 'wfalbum'))) {
+            echo 'not in cache';
+            $albums = $this->getApi()->api('624804112/albums', 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
+            Axche::set('album_' . get_current_user_id(), $albums, 'wfalbum');
         }
-        $result = $this->api($this->conf['admin'][0] . '/albums', 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
-        wp_cache_add('albums', $result, 'wfalbums', time() + 3600);
-        return $result;
+        return $albums;
     }
     
     public function getPhotos($album_id) {
-        return $result = $this->getapi()->api
-                
-                
-                ($album_id . '/photos', 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
-        
+        if (!($photos = Axche::get('album_' . $album_id, 'wfalbum'))) {
+            echo 'not in cache';
+            $photos = $this->getApi()->api($album_id . '/photos', 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
+            Axche::set('album_' . $album_id, $photos, 'wfalbum');
+        }
+        return $photos;
     }
     
 

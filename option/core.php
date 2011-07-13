@@ -39,6 +39,7 @@ class WfalbumOptionCore {
         add_settings_field('fb_app_id', 'Facebook App ID/Key', array('WfalbumOptionCore', 'setting_control_fb_app_id'), 'wfalbum_facebook', $optionName . '_facebook');
         add_settings_field('fp_app_secret', 'Facebook App Secret', array('WfalbumOptionCore', 'setting_control_fb_app_secret'), 'wfalbum_facebook', $optionName . '_facebook');
         add_settings_field('fp_user_id', 'Facebook User Id', array('WfalbumOptionCore', 'setting_control_fb_user_id'), 'wfalbum_facebook', $optionName . '_facebook');
+        add_settings_field('fp_cache_time', 'Cache Time', array('WfalbumOptionCore', 'setting_control_fp_cache_time'), 'wfalbum_facebook', $optionName . '_facebook');
         
         
         //USE buildin Setting > General page

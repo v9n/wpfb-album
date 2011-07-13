@@ -14,14 +14,16 @@ include 'filter/core.php';
 include 'widget/core.php';
 include 'model/core.php';
 include 'helper/core.php';
-        
+include 'helper/cache.php';
+
 class Wfalbum {
 
     public function __construct() {
         $this->pluginName = dirname(plugin_basename(__FILE__));
         $this->pluginUrl = WP_PLUGIN_URL . "/$this->pluginName/";
         $this->pluginPath = WP_PLUGIN_DIR . "/$this->pluginName/";
-
+        
+        Axche::init(array('dir' => $this->pluginPath . 'cache/'));
         /**
          * Handle shortcode! 
          * WfAlbumHelperGallery parse shortocode, gather data for album,
@@ -124,7 +126,7 @@ class Wfalbum {
         $uri = empty($_GET['uri']) ? (empty($_GET['page']) ? 'front' : $_GET['page']) : $_GET['uri'];
         $part = explode('/', $uri, 2);
         if ($part[0] == $this->routerPrefix) {
-            $this->execute($part[1], '');
+            $this->execute(WfalbumHelperCore::e($part[1], ''), '');
         }
     }
 

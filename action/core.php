@@ -18,8 +18,7 @@ class WfalbumActionCore {
      * Admin Bootstrap for Wfalbum
      */
     public static function bootstrap_admin() {
-        add_meta_box("Wfalbum-meta", "Products Options", array('WfalbumActionCore', 'meta_options'), FILE_BIRD_POST_TYPE, "normal", "low");
-        add_meta_box("Wfalbum-cp-meta", "Wfalbum Options", array('WfalbumActionCore', 'meta_cp_options'), 'ad_listing', "side", "low");
+        
     }
 
     /**
