@@ -5,7 +5,7 @@
  * by kureikain
  */
 
-class FilebirdModelCore {
+class WfalbumModelCore {
 
     private static $_models = array();
     
