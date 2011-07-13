@@ -196,10 +196,7 @@ class Wfalbum {
      * @return Wfalbum
      */
     static public function singleton() {
-        static $i=10;
-        echo $i++;
         if (!self::$_self) {
-            echo 'tao';
             self::$_self = new Wfalbum();
             self::$_self->init();
         }
