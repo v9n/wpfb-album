@@ -22,7 +22,7 @@ class WfalbumHelperFb {
      */
     public static function singleton() {
         if (!self::$_self) {
-            self::$_self = new DevgmHelperFb();
+            self::$_self = new WfalbumHelperFb();
         }
         return self::$_self;
     }
@@ -33,7 +33,10 @@ class WfalbumHelperFb {
      * @return <string> authenticate url
      */
     public function getAuthUrl() {
-        return "http://www.facebook.com/dialog/oauth?client_id=" . $this->conf['core']['id'] . "&redirect_uri=" . urlencode($this->conf['canvas']['page']) . '&scope=' . $this->conf['scope'];
+        $url = "http://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s&scope=";
+        $redirect_url = $this->conf['canvas']['page'] . '?domain=' . get_bloginfo('url');
+        return sprintf($url, $this->conf['core']['id'], urlencode($redirect_url) , $this->conf['scope']);
+        //return "http://www.facebook.com/dialog/oauth?client_id=" . $this->conf['core']['id'] . "&redirect_uri=" . urlencode($this->conf['canvas']['page']) . '&scope=' . $this->conf['scope'];
     }
 
     /**
@@ -46,19 +49,19 @@ class WfalbumHelperFb {
         $this->conf = array(
             'appname' => NULL, //$option['canvas_url'],
             //This is a human name which can appear on wall or something! It should be easy to memorize, space and special char is ok
-            'friendlyname' => 'Axcoto\'s Event Voting',
+            'friendlyname' => 'WordPress Facebook Photos',
             //List of facebook user who you want to let him/her edit questions
             'admin' => array(
                 0 => $option['fb_user_id']
             ),
             //These value you can grab from facebook application setting page
             'core' => array(
-                'id' => $option['fb_app_id'],
-                'secret' => $option['fb_app_secret']
+                'id' => '168649699868824', //$option['fb_app_id'],
+                'secret' => '3800f10cd2e54ec6ae3c3a1e05e6e488', //$option['fb_app_secret']
             ),
             'scope' => 'user_photos,offline_access',
             'canvas' => array(
-                'url' => NULL, //$option['fbapp_canvas_url'] . '/',
+                'url' => 'http://cc.axcoto.com/wpfb-bridge/', //$option['fbapp_canvas_url'] . '/',
                 'page' => 'https://apps.facebook.com/wpfbalbum/wp-admin/admin.php?page=wfalbum&noheader=true',
             )
         );
