@@ -30,6 +30,7 @@ class Wfalbum {
          * then call corresponding gallery plugin to output content
          */
         WfalbumHelperCore::load('gallery', false);
+        WfalbumHelperGallery::init();
         add_shortcode('wfalbum', array('WfalbumHelperGallery', 'shortcode'));
 
         if (count($this->styles)) {

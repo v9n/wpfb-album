@@ -13,8 +13,14 @@ class WfalbumHelpGalleryGalleria extends WfalbumHelperGallery {
         );
     }
     
-    public function render() {
-        
+    public function render($photos) {
+?>
+<div id="galleria">
+<?php foreach ($photos['data'] as $photo) : ?>    
+    <a href="<?php echo $photo['name']?>"><img title="<?php echo $photo['name']?>" alt="<?php echo $photo['name']?>" src="<?php echo $photo['picture']?>"></a>
+<?php endforeach; ?>    
+</div>
+<?php
     }
     
     public function bootstrap() {
