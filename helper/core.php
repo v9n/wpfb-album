@@ -42,5 +42,22 @@ class WfalbumHelperCore {
         return null;
     }
 
+    static public function getFbToken() {
+        static $token = array();
+        if (!$token) {
+            $user_id = get_current_user_id();
+
+            $fbuid = get_user_meta($user_id, 'fbuid', true);
+            $access_to = get_user_meta($user_id, 'fbuid', true);
+            if (!$fbuid | $access_to) {
+                return FALSE;
+            }
+            $token = array(
+                $fbuid, $access_to
+            );
+        }
+
+        return $token;
+    }
 
 }
