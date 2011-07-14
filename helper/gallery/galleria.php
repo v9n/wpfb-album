@@ -5,12 +5,23 @@
  */
 
 class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfalbumHelperGallery {
-
+    
     static public function info() {
         return array(
             'id' => 'galleria',
             'name' => 'jQuery Galleria'
         );
+    }
+
+    static function bootstrap() {
+        wp_enqueue_script('galleria', self::url('gallery/galleria/galleria-1.2.4.min.js'), array('jquery'), '1.0.0', true);
+    }
+    
+    /**
+     * Render preference setting box for this plugin
+     */
+    static function preference() {
+        wp_enqueue_script('galleria', self::url('gallery/galleria/galleria-1.2.4.min.js'), array('jquery'), '1.0.0', true);
     }
 
     public function render($photos) {
@@ -33,11 +44,6 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
             })(jQuery);
         </script>
         <?php
-    }
-
-    static function bootstrap() {
-        
-        wp_enqueue_script('galleria', self::url('gallery/galleria/galleria-1.2.4.min.js'), array('jquery'), '1.0.0', true);
     }
 
 }
