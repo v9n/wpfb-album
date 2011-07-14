@@ -23,7 +23,7 @@ class Wfalbum {
         $this->pluginUrl = WP_PLUGIN_URL . "/$this->pluginName/";
         $this->pluginPath = WP_PLUGIN_DIR . "/$this->pluginName/";
     }
-    
+
     public function init() {
         Axche::init(array('dir' => $this->pluginPath . 'cache/'));
         /**
@@ -38,7 +38,7 @@ class Wfalbum {
         if (count($this->styles)) {
             foreach ($this->styles as $name => $style) {
                 wp_register_style($name, $this->pluginUrl . $style[0], $style[1], $style[2], $style[3]);
-                if ($style[4]=='auto' || ($style[4] == 'admin' && is_admin()) || $style[4] == 'frontend') {
+                if ($style[4] == 'auto' || ($style[4] == 'admin' && is_admin()) || $style[4] == 'frontend') {
                     //wp_enqueue_style($name);
                 }
             }
@@ -46,7 +46,7 @@ class Wfalbum {
         if (count($this->scripts)) {
             foreach ($this->scripts as $name => $script) {
                 wp_register_script($name, $this->pluginUrl . $script[0], $script[1], $script[2], $script[3]);
-                if ($script[4]=='auto' || ($script[4] == 'admin' && is_admin()) || $script[4] == 'frontend') {
+                if ($script[4] == 'auto' || ($script[4] == 'admin' && is_admin()) || $script[4] == 'frontend') {
                     wp_enqueue_script($name);
                 }
             }
@@ -135,17 +135,20 @@ class Wfalbum {
 
     /**
      * Dispatcher for front end route!
-     * The route comes is in /routerPrefix/Controlle/Action
-     * @global <type> $wp_query
+     * The router comes is in format /routerPrefix/Controlle/Action!
+     * THIS IS TO HANDLE ACTION ONLY, IT'S NOT GOINT TO RENDER CORRECT TEMPLATE!
+     * THIS IS ONLY TO EXECUTE REQUEST WHICH NEED NO GOOD-LOOKING RESPONSE
+     * @global WP_Query $wp_query
      */
     public function handleFrontendAction() {
         global $wp_query;
         $query = $wp_query->query;
         $pagename = WfalbumHelperCore::g($query['pagename'], null);
         $uri = WfalbumHelperCore::g($query['axcotouri'], null);
-        
-        if ($pagename == $this->routerPrefix) {
-            $this->execute($uri, 'frontend/');
+
+        $pagename = explode('/', $pagename, 2);
+        if (count($pagename) && $pagename[0] == $this->routerPrefix) {
+            $this->execute($pagename[1], 'frontend/');
         }
     }
 
@@ -206,7 +209,7 @@ class Wfalbum {
     public function uri($page, $uri) {
         return 'admin.php?page=Wfalbum/' . $page . '&uri=Wfalbum/' . $uri;
     }
-    
+
     public function url($file) {
         return $this->pluginUrl . $file;
     }
