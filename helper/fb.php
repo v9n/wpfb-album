@@ -34,7 +34,7 @@ class WfalbumHelperFb {
      */
     public function getAuthUrl() {
         $url = "http://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s&scope=";
-        $redirect_url = $this->conf['canvas']['page'] . '?domain=' . get_bloginfo('url');
+        $redirect_url = $this->conf['canvas']['page'] . '?domain=' . get_bloginfo('url') . '&uid=' . get_current_user_id();
         return sprintf($url, $this->conf['core']['id'], urlencode($redirect_url) , $this->conf['scope']);
         //return "http://www.facebook.com/dialog/oauth?client_id=" . $this->conf['core']['id'] . "&redirect_uri=" . urlencode($this->conf['canvas']['page']) . '&scope=' . $this->conf['scope'];
     }
@@ -47,7 +47,7 @@ class WfalbumHelperFb {
         global $wpfb_album;
         $option = get_option($wpfb_album->optionName);
         $this->conf = array(
-            'appname' => NULL, //$option['canvas_url'],
+            'appname' => 'wpfbalbum', //$option['canvas_url'],
             //This is a human name which can appear on wall or something! It should be easy to memorize, space and special char is ok
             'friendlyname' => 'WordPress Facebook Photos',
             //List of facebook user who you want to let him/her edit questions
@@ -62,7 +62,7 @@ class WfalbumHelperFb {
             'scope' => 'user_photos,offline_access',
             'canvas' => array(
                 'url' => 'http://cc.axcoto.com/wpfb-bridge/', //$option['fbapp_canvas_url'] . '/',
-                'page' => 'https://apps.facebook.com/wpfbalbum/wp-admin/admin.php?page=wfalbum&noheader=true',
+                'page' => 'https://apps.facebook.com/wpfbalbum/',
             )
         );
     }
