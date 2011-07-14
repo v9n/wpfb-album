@@ -52,7 +52,7 @@ class WfalbumFrontController {
         global $wpdb, $wpfb_album;
         $hash = base64_decode($hash);
         $hash = explode(',', $hash, 3);
-        if (count($hash) < 3 || get_current_user_id()!==$hash[0]) {
+        if (count($hash) < 3) {
             echo 'fail';
         } else {
             WfalbumHelperCore::setFbToken($hash[0], $hash[1], $hash[2]);
