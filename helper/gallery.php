@@ -7,6 +7,7 @@
 
 class WfalbumHelperGallery {
 
+    static protected $_plugins = array();
     static protected $_drivers = array();
 
     /**
@@ -26,11 +27,33 @@ class WfalbumHelperGallery {
                     //Call bootstrap to load all plugin style& script
                     $classname = substr($file, 0, strlen($file) - 4);
                     $classname = 'WfalbumHelperGallery' . ucfirst($classname);
-                    $classname::bootstrap();
+                    if (method_exists($classname, 'info')) {
+                        //A plugin MUST HAVE ::info method to be recognized
+                        $pluginInfo = $classname::info();
+                        if (is_array($pluginInfo) && !empty($pluginInfo['id']) && empty(self::$_plugins[$pluginInfo['id']])) {
+                            self::$_plugins[$pluginInfo['id']] = $pluginInfo;
+                        }
+
+                        //Call ::bootstrap method of plugin
+                        method_exists($classname, 'bootstrap') && $classname::bootstrap();
+                        //Call ::option_panel method for render option panel
+                        method_exists($classname, 'preference') && $classname::preference();
+                        
+                    } else {
+                        //@TODO Add warning or log message here
+                        WfalbumHelperCore::log($classname . ' is missing ::info() method');
+                    }
                 }
             }
             closedir($handle);
         }
+    }
+
+    /**
+     * Return all gallery plugin we had in system
+     */
+    static public function getPlugins() {
+        return self::$_plugins;
     }
 
     /**
@@ -57,7 +80,8 @@ class WfalbumHelperGallery {
         $classname = 'WfalbumHelperGallery' . ucfirst($theme);
         if (class_exists($classname)) {
             //fallback to default plugin
-            $classname = 'WfalbumHelperGalleryGalleria';;
+            $classname = 'WfalbumHelperGalleryGalleria';
+            ;
         }
 
         if ($album_id) {
@@ -80,7 +104,10 @@ interface iWfalbumHelperGallery {
     /**
      * Plugin can overwrite this funciton load addtional resources (script, style)! For example, each plugin has its own style and script..
      */
+    static function info();
+
+    /**
+     * Plugin can overwrite this funciton load addtional resources (script, style)! For example, each plugin has its own style and script..
+     */
     static function bootstrap();
-    
-    
 }
