@@ -46,9 +46,8 @@ class WfalbumHelperCore {
         static $token = array();
         if (!$token) {
             $user_id = get_current_user_id();
-
-            $fbuid = get_user_meta($user_id, 'fbuid', true);
-            $access_to = get_user_meta($user_id, 'fbuid', true);
+            $fbuid = get_user_meta($user_id, 'wfalbum_fbuid', true);
+            $access_to = get_user_meta($user_id, 'wfalbum_access_token', true);
             if (!$fbuid | $access_to) {
                 return FALSE;
             }
@@ -58,6 +57,12 @@ class WfalbumHelperCore {
         }
 
         return $token;
+    }
+
+    static public function setFbToken($user_id, $fbuid, $access_token) {
+        update_user_meta($user_id, 'wfalbum_access_token', $access_token);
+        update_user_meta($user_id, 'wfalbum_fbuid', $fbuid);
+        return true;
     }
 
 }

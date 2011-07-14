@@ -48,16 +48,17 @@ class WfalbumFrontController {
      * @global Wfalbum $wpfb_album
      * @param $user_id id of user on WordPress! When user get redirecting to my facebook app to authorize, this user_id will be passed to my facebook app too!
      */
-    public function action_save_token($user_id=0, $access_token=NULL) {
+    public function action_save_token($hash=NULL) {
         global $wpdb, $wpfb_album;
-        if (!$user_id || !$access_token) {
+        $hash = base64_decode($hash);
+        $hash = explode(',', $hash, 3);
+        if (count($hash) < 3 || get_current_user_id()!==$hash[0]) {
             echo 'fail';
-            return;
-        } elseif (update_user_meta($user_id, 'wfalbum_access_token', $access_token)) {
-            echo 'success';
         } else {
-            echo 'fail';
+            WfalbumHelperCore::setFbToken($hash[0], $hash[1], $hash[2]);
+            echo 'success';
         }
+        exit;
     }
 
 }
