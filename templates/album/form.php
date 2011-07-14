@@ -1,44 +1,7 @@
 <script type="text/javascript">
     (function ($) {
-        var wfapp = {
-            genShortCode : function () {
-                var shortcode = [];
-                //                for (x in wfalbum) {            
-                //                    var pro = [
-                //                        x, '="', wfalbum[x], '"'  
-                //                    ];
-                //                    shortcode.push(pro.join('')); 
-                //                }
-                //                return '[' + shortcode.join(" ") + ']';        
-            },
-    
-            insert : function () {
-        
-            },
-            
-            move : function () {
-                
-            },
-            
-            init : function () {
-                var $wfalbum_list = $('#wfalbum-list');
-                $('li', $wfalbum_list).click(function () {
-                    if ($(this).hasClass('selected')) {
-                        $(this).removeClass('selected')
-                    } else {
-                        $(this).addClass('selected')
-                    }
-                })
-            },
-            
-            fn : {}
-        }    
-    
-        $(document).ready(function () {
-            wfapp.init();
-        })
 
-    }    
+    }) (jQuery)    
 
 </script>
 
