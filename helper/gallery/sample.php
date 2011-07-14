@@ -8,16 +8,22 @@
 class WfalbumHelperGallerySample extends WfalbumHelperGallery {
     static public function info() {
         return array(
-            'id' => 'Sample',
-            'name' => 'Sample'
+            'id' => 'sample', //Should be in low-case without any special character, and unique too! So, be catefully when choosing a id
+            'name' => 'Sample' //Any text to identify or name your plugin
         );
     }
+    
+    static public function bootstrap() {
+        //Should load extra css, script? Put it here
+        //wp_enqueu_style
+        //wp_enqueu_script
+        ;
+    }
+    
     
     public function render() {
         
     }
     
-    static public function bootstrap() {
-        ;
-    }
+    
 }
