@@ -28,16 +28,27 @@
         </div>
 
         <div class="" id="wfalbum-option">
-            <select name="theme">
-                <option>Galleria</option>
-                <option>Nivo</option>
-                <option>Coint</option>
+            <select name="plugin">
+                <?php
+                foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
+                    ?>
+                    <option value="<?php echo $plugin['id'] ?>"><?php echo $plugin['name'] ?></option>
+                    <?php
+                endforeach
+                ?>                    
             </select>
+
             <?php
-            do_action('wfalbum_plugin_galleria');
-            do_action('wfalbum_plugin_nivo');
-            do_action('wfalbum_plugin_coint');
+            //Display option panel
+            foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
+                ?>
+            <div id="wf_option_<?php echo $plugin['id']?>" class="wf_option_panel">
+                <?php do_action('wfalbum_plugin_' . $plugin['id']);?>
+            </div>
+                <?php
+            endforeach
             ?>
+
             <div id="wfalbum_gallery_galleria">
                 <input type="text" name="shortcode[width]" value="" />
                 <input type="text" name="shortcode[height]" value="" />
