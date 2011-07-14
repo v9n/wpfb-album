@@ -26,15 +26,7 @@ class Wfalbum {
 
     public function init() {
         Axche::init(array('dir' => $this->pluginPath . 'cache/'));
-        /**
-         * Handle shortcode! 
-         * WfAlbumHelperGallery parse shortocode, gather data for album,
-         * then call corresponding gallery plugin to output content
-         */
-        WfalbumHelperCore::load('gallery', false);
-        WfalbumHelperGallery::init();
-        add_shortcode('wfalbum', array('WfalbumHelperGallery', 'shortcode'));
-
+        
         if (count($this->styles)) {
             foreach ($this->styles as $name => $style) {
                 wp_register_style($name, $this->pluginUrl . $style[0], $style[1], $style[2], $style[3]);
@@ -63,6 +55,16 @@ class Wfalbum {
             'ajaxurl' => admin_url('admin-ajax.php'),
             'url' => get_bloginfo('url'),
         ));
+
+        /**
+         * Handle shortcode! 
+         * WfAlbumHelperGallery parse shortocode, gather data for album,
+         * then call corresponding gallery plugin to output content
+         */
+        WfalbumHelperCore::load('gallery', false);
+        WfalbumHelperGallery::init();
+        add_shortcode('wfalbum', array('WfalbumHelperGallery', 'shortcode'));
+
 
         register_activation_hook(__FILE__, array(&$this, 'active'));
         register_deactivation_hook(__FILE__, array(&$this, 'deactive'));

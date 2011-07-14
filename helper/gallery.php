@@ -13,6 +13,10 @@ class WfalbumHelperGallery {
     /**
      * Load all gallery plugins!
      * Each gallery plugin must have a bootstrap method since they implement iWfalbumHelperGallery
+     * Each gallery plugin must have a ::info method to be recognized and declare itself
+     * Each gallery plugin should have a ::preference method to render preference box! Actually,
+     * WfAlbum auto add an action with the name wfalbum_plugin_{plugin_id} to render its preference box
+     * 
      * @global Wfalbum $wpfb_album
      * @param string $driver 
      */
@@ -34,10 +38,8 @@ class WfalbumHelperGallery {
                             self::$_plugins[$pluginInfo['id']] = $pluginInfo;
                         }
 
-                        //Call ::bootstrap method of plugin
                         method_exists($classname, 'bootstrap') && $classname::bootstrap();
-                        //Call ::option_panel method for render option panel
-                        method_exists($classname, 'preference') && $classname::preference();
+                        method_exists($classname, 'preference') && add_action('wfalbum_plugin_' . $pluginInfo['id'], array($classname, 'preference'));
                         
                     } else {
                         //@TODO Add warning or log message here
@@ -92,7 +94,7 @@ class WfalbumHelperGallery {
                 if (empty(self::$_drivers[$theme])) {
                     self::$_drivers[$theme] = new $classname();
                 }
-                return self::$_drivers[$theme]->render($photos);
+                return self::$_drivers[$theme]->render($photos, $atts);
             }
         }
     }
@@ -110,4 +112,13 @@ interface iWfalbumHelperGallery {
      * Plugin can overwrite this funciton load addtional resources (script, style)! For example, each plugin has its own style and script..
      */
     static function bootstrap();
+    /**
+     * When users choose to use a plugin (theme in other word),
+     * each plugin can have its own option so each plugin can implement this method to render
+     * option box
+     */
+    static function preference();
+    
+    function render($photo, $atts=NULL);
+    
 }

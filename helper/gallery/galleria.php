@@ -5,7 +5,7 @@
  */
 
 class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfalbumHelperGallery {
-    
+
     static public function info() {
         return array(
             'id' => 'galleria',
@@ -15,23 +15,31 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
 
     static function bootstrap() {
         wp_enqueue_script('galleria', self::url('gallery/galleria/galleria-1.2.4.min.js'), array('jquery'), '1.0.0', true);
+        wp_enqueue_script('galleria-plugin', self::url('gallery/galleria/wf.galleria.js'), array('wfalbum-app-core'), '1.0.0', true);
     }
-    
+
     /**
      * Render preference setting box for this plugin
      */
     static function preference() {
-        wp_enqueue_script('galleria', self::url('gallery/galleria/galleria-1.2.4.min.js'), array('jquery'), '1.0.0', true);
+        ?>
+        <label>Width</label>
+        <label>Heigh</label>
+        <label>Show Counter</label>
+        <label>Show image nav</label>
+        <?php
     }
 
-    public function render($photos) {
+    public function render($photos, $atts=NULL) {
+        static $i=0;
+        $i++;
+        $instance = 'wf_render_' . $i;
         ?>
-        <div id="galleria">
+        <div id="<?php echo $instance?>">
             <?php foreach ($photos['data'] as $photo) : ?>    
-                <a href="<?php echo $photo['name'] ?>"><img title="<?php echo $photo['name'] ?>" alt="<?php echo $photo['name'] ?>&quote;" src="<?php echo $photo['images'][0]['source'] ?>"></a>
-        <?php endforeach; ?>    
+            <a href="#<?php //echo $photo['name'] ?>"><img title="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'], '')); ?>" alt="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'])); ?>&quote;" src="<?php echo $photo['images'][0]['source'] ?>"></a>
+            <?php endforeach; ?>    
         </div>
-        <style>#galleria{height:320px;}</style>
         <script>
             (function ($) {
                 $(document).ready(function () {
@@ -39,7 +47,9 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
                     Galleria.loadTheme('<?php echo Wfalbum::singleton()->url('helper/gallery/galleria/themes/classic/galleria.classic.min.js') ?>');
 
                     // Initialize Galleria
-                    $('#galleria').galleria();
+                    $('#<?php echo $instance?>').galleria({
+                        height: 320
+                    });
                 })  
             })(jQuery);
         </script>
