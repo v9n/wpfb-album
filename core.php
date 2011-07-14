@@ -39,7 +39,7 @@ class Wfalbum {
             foreach ($this->styles as $name => $style) {
                 wp_register_style($name, $this->pluginUrl . $style[0], $style[1], $style[2], $style[3]);
                 if ($style[4] == 'auto' || ($style[4] == 'admin' && is_admin()) || $style[4] == 'frontend') {
-                    //wp_enqueue_style($name);
+                    wp_enqueue_style($name);
                 }
             }
         }
@@ -225,8 +225,8 @@ class Wfalbum {
     public $routerPrefix = 'wfalbum';
     public $baseSlug = 'wfalbum';
     public $styles = array(
-        'wfalbum-reset' => array('assets/css/reset.css', false, '1.0.0', 'all', 'frontend'),
-        'wfalbum-all' => array('assets/css/axcoto.css', array('wfalbum-reset'), '1.0.0', 'all', 'frontend'),
+        'wfalbum-reset' => array('assets/css/reset.css', false, '1.0.0', 'all', 'depend'),
+        'wfalbum-all' => array('assets/css/axcoto.css', array('wfalbum-reset'), '1.0.0', 'all', 'auto'),
     );
     public $scripts = array(
         //src, depend, version, in footer, [admin|frontend]

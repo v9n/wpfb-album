@@ -17,23 +17,36 @@
         var wdw = window.dialogArguments || opener || parent || top;
         wdw.send_to_editor(construct);
     }
+(function ($) {
+    $(document).ready(function () {
+        $wfalbum_list = $('#wfalbum-list');
+        $('li', $wfalbum_list).click(function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected')
+            } else {
+                $(this).addClass('selected')
+            }
+        })
+    })
+})(jQuery)    
 </script>
 
 <div id="wfalbum_form" style="display:none;">
-    <div class="wrap">
-        <?php
-        foreach ($albums['data'] as $keys => $album) {
-            $photos = $fb->getPhotos($album['id']);
-            $album_cover = empty($photos['data'][0]['images'][3]) ? '' : $photos['data'][0]['images'][3]['source'];
-            ?>
-            <div style='padding: 10px; width: 150px; height: 170px; float: left;'>
-                <a href='admin.php?page=wfalbum&uri=wfalbum/front/album/" . $album['id'] . "'>
-                   <img src='<?php echo $album_cover ?>' border='1' />
-                </a>
-            </div>
+    <div class="wfalbum_wrap">
+        <ul id="wfalbum-list">
             <?php
-        }
-        ?>
+            foreach ($albums['data'] as $keys => $album) {
+                $photos = $fb->getPhotos($album['id']);
+                $album_cover = empty($photos['data'][0]['images'][3]) ? '' : $photos['data'][0]['images'][3]['source'];
+                ?>
+                <li>
+                    <a title="" href='#'><img src='<?php echo $album_cover ?>' border='0' alt="" title="" /></a>
+                    <span><?php echo $album['name']?></span>
+                </li>
+                <?php
+            }
+            ?>
+        </ul>
         <select name="theme">
             <option>Galleria</option>
             <option>Nivo</option>
