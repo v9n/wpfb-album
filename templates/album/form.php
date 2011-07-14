@@ -1,62 +1,87 @@
 <script type="text/javascript">
-    function insert_filebird_button(){
-        product_id = jQuery("#filebird_product").val()
-        image = jQuery("#filebird_button_image_url").val()
-
-        construct = '<a href="<?php echo get_bloginfo('home'), '/', Wfalbum::singleton()->routerPrefix ?>/product/checkout/' + product_id + '"><img src="' + image + '" /></a>';
-
-        var wdw = window.dialogArguments || opener || parent || top;
-        wdw.send_to_editor(construct);
-    }
-
-    function insert_filebird_link(){
-        product_id = jQuery("#filebird_product").val()
-
-        construct = '<a href="<?php echo get_bloginfo('home'), '/', Wfalbum::singleton()->routerPrefix ?>/product/checkout/' + product_id + '"><?php echo get_option('siteurl') ?>/?checkout=' + product_id + '</a>';
-
-        var wdw = window.dialogArguments || opener || parent || top;
-        wdw.send_to_editor(construct);
-    }
-(function ($) {
-    $(document).ready(function () {
-        $wfalbum_list = $('#wfalbum-list');
-        $('li', $wfalbum_list).click(function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected')
-            } else {
-                $(this).addClass('selected')
-            }
+    (function ($) {
+        var wfapp = {
+            genShortCode : function () {
+                var shortcode = [];
+                //                for (x in wfalbum) {            
+                //                    var pro = [
+                //                        x, '="', wfalbum[x], '"'  
+                //                    ];
+                //                    shortcode.push(pro.join('')); 
+                //                }
+                //                return '[' + shortcode.join(" ") + ']';        
+            },
+    
+            insert : function () {
+        
+            },
+            
+            move : function () {
+                
+            },
+            
+            init : function () {
+                var $wfalbum_list = $('#wfalbum-list');
+                $('li', $wfalbum_list).click(function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected')
+                    } else {
+                        $(this).addClass('selected')
+                    }
+                })
+            },
+            
+            fn : {}
+        }    
+    
+        $(document).ready(function () {
+            wfapp.init();
         })
-    })
-})(jQuery)    
+
+    }    
+
 </script>
 
 <div id="wfalbum_form" style="display:none;">
     <div class="wfalbum_wrap">
-        <ul id="wfalbum-list">
-            <?php
-            foreach ($albums['data'] as $keys => $album) {
-                $photos = $fb->getPhotos($album['id']);
-                $album_cover = empty($photos['data'][0]['images'][3]) ? '' : $photos['data'][0]['images'][3]['source'];
-                ?>
-                <li>
-                    <a title="" href='#'><img src='<?php echo $album_cover ?>' border='0' alt="" title="" /></a>
-                    <span><?php echo $album['name']?></span>
-                </li>
+        <div id="wfalbum_container">
+            <ul id="wfalbum-list">
                 <?php
-            }
+                foreach ($albums['data'] as $keys => $album) {
+                    $photos = $fb->getPhotos($album['id']);
+                    $album_cover = empty($photos['data'][0]['images'][3]) ? '' : $photos['data'][0]['images'][3]['source'];
+                    ?>
+                    <li>
+                        <a title="" href='#'><img src='<?php echo $album_cover ?>' border='0' alt="" title="" /></a>
+                        <span><?php echo $album['name'] ?></span>
+                    </li>
+                    <?php
+                }
+                ?>
+            </ul>
+            <div class="clear"></div>
+            <a href="#" id="wfalbum-clear-cache">Clear Cache</a>
+            <input type="button" class="button-primary" value="Next" id=""/>
+        </div>
+
+        <div class="" id="wfalbum-option">
+            <select name="theme">
+                <option>Galleria</option>
+                <option>Nivo</option>
+                <option>Coint</option>
+            </select>
+            <?php
+            do_action('wfalbum_plugin_galleria');
+            do_action('wfalbum_plugin_nivo');
+            do_action('wfalbum_plugin_coint');
             ?>
-        </ul>
-        <select name="theme">
-            <option>Galleria</option>
-            <option>Nivo</option>
-            <option>Coint</option>
-        </select>
-        <?php
-        do_action('')
-        ?>
-        <div style="padding:15px;">
-            <input type="button" class="button-primary" value="Insert Button" onclick="insert_filebird_button();"/>&nbsp;&nbsp;&nbsp;&nbsp;
+            <div id="wfalbum_gallery_galleria">
+                <input type="text" name="shortcode[width]" value="" />
+                <input type="text" name="shortcode[height]" value="" />
+            </div>
+
+            <input type="button" class="button-primary" value="Insert Album" id="wfalbum-inserter"/>&nbsp;&nbsp;&nbsp;&nbsp;
+
         </div>
 
     </div>
