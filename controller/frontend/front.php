@@ -17,7 +17,7 @@ class WfalbumFrontController {
         $session = $facebook->getSession();
 
         $me = null;
-        // Session based API call.
+// Session based API call.
         if ($session) {
             try {
                 $uid = $facebook->getUser();
@@ -48,9 +48,12 @@ class WfalbumFrontController {
      * @global Wfalbum $wpfb_album
      * @param $user_id id of user on WordPress! When user get redirecting to my facebook app to authorize, this user_id will be passed to my facebook app too!
      */
-    public function action_save_token($user_id, $access_token) {
+    public function action_save_token($user_id=0, $access_token=NULL) {
         global $wpdb, $wpfb_album;
-        if (update_user_meta($user_id, 'wfalbum_access_token', $access_token)) {
+        if (!$user_id || !$access_token) {
+            echo 'fail';
+            return;
+        } elseif (update_user_meta($user_id, 'wfalbum_access_token', $access_token)) {
             echo 'success';
         } else {
             echo 'fail';
