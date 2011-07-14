@@ -10,7 +10,7 @@ if (!class_exists('Axche')) {
 
         static protected $_config = array(
             'dir' => '',
-            'exp' => 300
+            'exp' => 3000
         );
 
         static public function init($config) {

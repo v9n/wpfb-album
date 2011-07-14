@@ -74,7 +74,12 @@ class WfalbumActionCore {
     public static function footer() {
         global $wpfb_album;
         global $post;
-        include $wpfb_album->pluginPath . 'templates/album/form.php';
+        $fb = WfalbumHelperCore::load('fb', true);
+        if (!$token = WfalbumHelperCore::getFbToken()) {
+            include $wpfb_album->pluginPath . 'templates/auth.php';
+        } else {
+            include $wpfb_album->pluginPath . 'templates/album/form.php';
+        }
     }
 
     public static function shutdown() {

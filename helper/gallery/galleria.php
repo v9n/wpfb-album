@@ -17,7 +17,7 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
         ?>
         <div id="galleria">
             <?php foreach ($photos['data'] as $photo) : ?>    
-                <a href="<?php echo $photo['name'] ?>"><img title="<?php echo $photo['name'] ?>" alt="<?php echo $photo['name'] ?>" src="<?php echo $photo['picture'] ?>"></a>
+                <a href="<?php echo $photo['name'] ?>"><img title="<?php echo $photo['name'] ?>" alt="<?php echo $photo['name'] ?>&quote;" src="<?php echo $photo['images'][0]['source'] ?>"></a>
         <?php endforeach; ?>    
         </div>
         <style>#galleria{height:320px;}</style>
