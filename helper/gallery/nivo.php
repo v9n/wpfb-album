@@ -8,7 +8,7 @@
 class WfalbumHelperGalleryNivo extends WfalbumHelperGallery {
     static public function info() {
         return array(
-            'id' => 'Nivo',
+            'id' => 'nivo',
             'name' => 'Nivo Slider'
         );
     }
