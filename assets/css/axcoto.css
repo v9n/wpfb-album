@@ -1,0 +1,61 @@
+.clear {clear: both }
+.none {display: none }
+
+.form li {margin-bottom: 10px;}
+.form li label{font-family: Georgia;   font-size: 1.3em; display: inline-block; width: 200px;}
+
+.redirect {text-align: center}
+.redirect h4{}
+.redirect p.message{}
+.redirect p{}
+
+ul.list {}
+ul.list li {display: inline-block;}
+
+
+/*Admin Css*/
+#wfalbum_form {
+   
+}
+
+#wfalbum_container {display: block}
+#wfalbum_option {display: none}
+#wfalbum_list {
+    padding: 0px; width: 600px; 
+    
+    /*height: 400px; overflow: auto; */
+}
+
+#wfalbum_list .wfalbum_item {
+    background: -moz-linear-gradient(center top , #FFFFFF, #F4F4F4) repeat scroll 0 0 transparent;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 0 #AAAAAA;
+    margin: 5px;
+    padding: 0px;
+    float: left;
+    width: 172px;
+}
+
+#wfalbum_list .wfalbum_item:hover, #wfalbum_list .wfalbum_item.selected {
+    border: 1px solid #BBBBBB;
+    box-shadow: 0 0 4px #999999;
+    opacity: 1;
+}
+
+#wfalbum_list .wfalbum_item a{
+    display: block; margin: auto;
+}
+#wfalbum_list .wfalbum_item img{
+    display: block; margin: 0 auto;
+}
+#wfalbum_list .wfalbum_item  span{
+    display: block; margin: auto;
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+#wfalbum_wrap .wf-control{
+    text-align: center; margin-top: 5px;
+}
