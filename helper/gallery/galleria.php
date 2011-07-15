@@ -22,10 +22,13 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
      * Render preference setting box for this plugin
      */
     static function preference() {
-        ?>
+?>        
         <label>Width</label>
+        <input type="text" name="galleria[width]" value="" />
         <label>Heigh</label>
-        <label>Show Counter</label>
+        <input type="text" name="galleria[height]" value="" />
+        <label>Counter</label>
+        <input type="checkbox" name="galleria[autoplay]" value="" />
         <label>Show image nav</label>
         <?php
     }

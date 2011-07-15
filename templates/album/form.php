@@ -1,4 +1,4 @@
-<div id="wfalbum_form" style="display:none;">
+<div id="wfalbum_form">
     <div class="wfalbum_wrap">
         <div id="wfalbum_container">
             <div id="wfalbum_list">
@@ -36,21 +36,16 @@
             </select>
 
             <div id="wf_option_container">
-            <?php
-            //Display option panel
-            foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
-                ?>
-                <div id="wf_option_<?php echo $plugin['id'] ?>" class="wf_option_panel">
-                    <?php do_action('wfalbum_plugin_' . $plugin['id']); ?>
-                </div>
                 <?php
-            endforeach
-            ?>
-            </div>
-            
-            <div id="wfalbum_gallery_galleria">
-                <input type="text" name="shortcode[width]" value="" />
-                <input type="text" name="shortcode[height]" value="" />
+                //Display option panel
+                foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
+                    ?>
+                    <div id="wf_option_<?php echo $plugin['id'] ?>" class="wf_option_panel">
+                        <?php do_action('wfalbum_plugin_' . $plugin['id']); ?>
+                    </div>
+                    <?php
+                endforeach
+                ?>
             </div>
 
             <div class="wf-control">
