@@ -3,6 +3,9 @@
  *  by Vincent Nguyen <info@axcoto.com>
  */
 wfapp.fn.builder.galleria = function() {
-    return "test builder";
+    return (function () {
+        var prep = $('#wf_prep_form_galleria').serialize();
+        return prep.replaceAll('&', ' ');
+    })(jQuery)
 }
 

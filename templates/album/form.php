@@ -7,7 +7,7 @@
                     $photos = $fb->getPhotos($album['id']);
                     $album_cover = empty($photos['data'][0]['images'][3]) ? '' : $photos['data'][0]['images'][3]['source'];
                     ?>
-                    <div class="wfalbum_item">
+                    <div class="wfalbum_item" id="wfalbum_item_<?php echo $album['id']?>" rel="<?php echo $album['id']?>">
                         <a title="" href='#'><img src='<?php echo $album_cover ?>' border='0' alt="" title="" /></a>
                         <span><?php echo $album['name'] ?></span>
                     </div>
@@ -41,7 +41,9 @@
                 foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
                     ?>
                     <div id="wf_option_<?php echo $plugin['id'] ?>" class="wf_option_panel">
-                        <?php do_action('wfalbum_plugin_' . $plugin['id']); ?>
+                        <form id="wf_prep_form_<?php echo $plugin['id'] ?>">
+                            <?php do_action('wfalbum_plugin_' . $plugin['id']); ?>
+                        </form>
                     </div>
                     <?php
                 endforeach
