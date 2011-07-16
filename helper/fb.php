@@ -81,7 +81,7 @@ class WfalbumHelperFb {
         }
         return $this->_api;
     }
-    
+
     /**
      * get album of current user!
      * 
@@ -94,7 +94,7 @@ class WfalbumHelperFb {
         if (!($albums = Axche::get('album_' . get_current_user_id(), 'wfalbum'))) {
             echo 'not in cache';
             $token = WfalbumHelperCore::getFbToken();
-            if ($token && count($token)==2) {
+            if ($token && count($token) == 2) {
                 $albums = $this->getApi()->api($token[0] . '/albums', 'GET', array('access_token' => $token[1]));
                 Axche::set('album_' . get_current_user_id(), $albums, 'wfalbum');
             } else {
@@ -107,8 +107,14 @@ class WfalbumHelperFb {
     public function getPhotos($album_id) {
         if (!($photos = Axche::get('album_' . $album_id, 'wfalbum'))) {
             echo 'not in cache';
-            $photos = $this->getApi()->api($album_id . '/photos', 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
-            Axche::set('album_' . $album_id, $photos, 'wfalbum');
+            $token = WfalbumHelperCore::getFbToken();
+            if ($token && count($token) == 2) {
+                $photos = $this->getApi()->api($album_id . '/photos', 'GET', array('access_token' => $token[1]));
+                Axche::set('album_' . $album_id, $photos, 'wfalbum');
+            } else {
+                return false;
+            }
+                
         }
         return $photos;
     }
@@ -116,8 +122,13 @@ class WfalbumHelperFb {
     public function getPhoto($photo_id) {
         if (!($photo = Axche::get('photo_' . $photo_id, 'wfalbum'))) {
             echo 'not in cache';
-            $photo = $this->getApi()->api($photo_id, 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
-            Axche::set('photo_' . $photo_id, $photo, 'wfalbum');
+            $token = WfalbumHelperCore::getFbToken();
+            if ($token && count($token) == 2) {
+                $photo = $this->getApi()->api($photo_id, 'GET', array('access_token' => $token[1]));
+                Axche::set('photo_' . $photo_id, $photo, 'wfalbum');
+            } else {
+                return false;
+            }
         }
 
         return $photo;
