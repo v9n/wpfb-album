@@ -235,8 +235,7 @@ class Wfalbum {
     public $routerPrefix = 'wfalbum';
     public $baseSlug = 'wfalbum';
     public $styles = array(
-        'wfalbum-reset' => array('assets/css/reset.css', false, '1.0.0', 'all', 'depend'),
-        'wfalbum-all' => array('assets/css/axcoto.css', array('wfalbum-reset'), '1.0.0', 'all', 'auto'),
+        'wfalbum-all' => array('assets/css/axcoto.css', NULL, '1.0.0', 'all', 'auto'),
     );
     public $scripts = array(
         //src, depend, version, in footer, [admin|frontend]
