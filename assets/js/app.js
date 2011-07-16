@@ -25,6 +25,16 @@ window.wfapp = {};
     window.wfapp = {
         wrap : null, 
         list : null,
+        loaded : false,
+        /**
+         * Show form and switch to album selecting screen
+         */
+        showForm : function () {
+            $('#wfalbum_option', wfapp.wrap).hide();
+            $('#wfalbum_container', wfapp.wrap).show();
+            !wfapp.loaded && wfapp.load();
+        }, 
+        
         /**
          * Load Album via Ajax
          */
@@ -39,6 +49,7 @@ window.wfapp = {};
                 success: function (data) {
                     $('#wfalbum_list', wfapp.wrap).html(data);
                     wfapp.selectedAlbum();
+                    wfapp.loaded = true;
                 }
             })
         },
@@ -70,7 +81,7 @@ window.wfapp = {};
                 shortcode.push(pro.join('')); 
             }
             
-            typeof(wfapp.fn.builder[prop.theme]!='undefined') && (pref = wfapp.fn.builder[prop.theme]()) && shortcode.push(pref);
+            typeof(wfapp.fn.builder[prop.theme])!='undefined' && (pref = wfapp.fn.builder[prop.theme]()) && shortcode.push(pref);
                             
             shortcode =  ['[','wfalbum ', shortcode.join(" "), ']'].join('');
             var wdw = window.dialogArguments || opener || parent || top;
@@ -109,7 +120,7 @@ window.wfapp = {};
             })
             
             $('#wf-clear-cache, #media_wf_album').click(function () {
-                wfapp.load();
+                wfapp.showForm();
             })
             
         },
