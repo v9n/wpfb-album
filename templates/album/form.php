@@ -6,9 +6,9 @@
             </div>
             <div class="clear"></div>
             <div class="wf-control">
-                <a href="#" id="wf-clear-cache">Clear Cache</a>
+                <a class="button" href="#" id="wf-clear-cache">Clear Cache</a>
                 &nbsp;&nbsp;&nbsp;
-                <input type="button" class="button-primary wf-next" value="Next" />
+                <a class="button-primary wf-next">Next</a>
             </div>
 
         </div>
