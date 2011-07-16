@@ -37,8 +37,8 @@ window.wfapp = {};
                     'action' : 'wf_load_albums'
                 },
                 success: function (data) {
-                    console.log(data);
                     $('#wfalbum_list', wfapp.wrap).html(data);
+                    wfapp.selectedAlbum();
                 }
             })
         },
@@ -81,31 +81,22 @@ window.wfapp = {};
             console.log(wfapp.fn.builder.galleria());
         },
             
-        move : function () {
-                
-        },
-            
         init : function () {
             
             var $wrap = wfapp.wrap = $('.wfalbum_wrap', '#wfalbum_form');
             var $list = wfapp.list = $('#wfalbum_list', $wrap);
-            
-            $('.wfalbum_item', $list).click(function () {
-                $('.wfalbum_item', $list).removeClass('selected');
-                $(this).addClass('selected');
+                
+            $('.wf-next', $wrap).click(function () {
+                //Choose a album first
+                //???
+                $('#wfalbum_container', $wrap).fadeOut('fast');
+                $('#wfalbum_option', $wrap).fadeIn('fast');
             })
             
             $('#wf-inserter', $wrap).click(function () {
                 wfapp.insert();
             });
             
-            $('.wf-next', $wrap).click(function () {
-                //Choose a album first
-                //???
-                
-                $('#wfalbum_container', $wrap).fadeOut('fast');
-                $('#wfalbum_option', $wrap).fadeIn('fast');
-            })
             $('.wf-back', $wrap).click(function () {
                 $('#wfalbum_option', $wrap).fadeOut('fast');
                 $('#wfalbum_container', $wrap).fadeIn('fast');
@@ -121,6 +112,14 @@ window.wfapp = {};
                 wfapp.load();
             })
             
+        },
+        
+        selectedAlbum : function () {
+            $('.wfalbum_item', wfapp.list).click(function () {
+                $('.wfalbum_item', wfapp.list).removeClass('selected');
+                $(this).addClass('selected');
+            })
+          
         }
     }
     
