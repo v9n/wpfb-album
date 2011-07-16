@@ -24,11 +24,11 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
     static function preference() {
 ?>        
         <label>Width</label>
-        <input type="text" name="galleria[width]" value="" />
+        <input type="text" name="width" value="" />
         <label>Heigh</label>
-        <input type="text" name="galleria[height]" value="" />
+        <input type="text" name="height" value="" />
         <label>Counter</label>
-        <input type="checkbox" name="galleria[autoplay]" value="" />
+        <input type="checkbox" name="autoplay" value="" />
         <label>Show image nav</label>
         <?php
     }

@@ -30,7 +30,7 @@ class WfalbumActionCore {
     public static function media_button($context) {
         global $wpfb_album;
         $image_url = $wpfb_album->pluginUrl . '/assets/images/media-button.png';
-        $more = '<a href="#TB_inline?width=1000&height=500&inlineId=wfalbum_form" class="thickbox" title="Insert Facebook Album"><img src="' . $image_url . '" alt="Insert Facebook Album" /></a>';
+        $more = '<a href="#TB_inline?width=580&height=500&inlineId=wfalbum_form" class="thickbox" title="Insert Facebook Album"><img src="' . $image_url . '" alt="Insert Facebook Album" /></a>';
         return $context . $more;
     }
 

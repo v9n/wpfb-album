@@ -61,7 +61,7 @@ window.wfapp = {};
             
             typeof(wfapp.fn.builder[prop.theme]!='undefined') && (pref = wfapp.fn.builder[prop.theme]()) && shortcode.push(pref);
                             
-            shortcode =  ['[','wfalbum', shortcode.join(" "), ']'].join('');
+            shortcode =  ['[','wfalbum ', shortcode.join(" "), ']'].join('');
             var wdw = window.dialogArguments || opener || parent || top;
             wdw.send_to_editor(shortcode);
 
@@ -89,6 +89,9 @@ window.wfapp = {};
             });
             
             $('.wf-next', $wrap).click(function () {
+                //Choose a album first
+                //???
+                
                 $('#wfalbum_container', $wrap).fadeOut('fast');
                 $('#wfalbum_option', $wrap).fadeIn('fast');
             })
@@ -107,14 +110,6 @@ window.wfapp = {};
     
     $(document).ready(function () {
         wfapp.init();
-        $('#wfalbum_list').imagesLoaded(function () {
-            $('#wfalbum_list').masonry({
-                // options
-                itemSelector : '.wfalbum_item'
-            });
-        //$('#wfalbum_form').hide();
-        })
-        
     })
 
 })(jQuery)

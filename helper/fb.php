@@ -101,5 +101,15 @@ class WfalbumHelperFb {
         return $photos;
     }
     
+    public function getPhoto($photo_id) {
+        if (!($photo = Axche::get('photo_' . $photo_id, 'wfalbum'))) {
+            echo 'not in cache';
+            $photo = $this->getApi()->api($photo_id, 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
+            Axche::set('photo_' . $photo_id, $photo, 'wfalbum');
+        }
+        
+        return $photo;
+    }
+    
 
 }
