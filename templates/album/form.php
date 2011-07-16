@@ -2,29 +2,11 @@
     <div class="wfalbum_wrap">
         <div id="wfalbum_container">
             <div id="wfalbum_list">
-                <?php
-                foreach ($albums['data'] as $keys => $album) {
-//                    $photos = $fb->getPhotos($album['id']);
-//                    $album_cover = empty($photos['data'][0]['images'][1]) ? '' : $photos['data'][0]['images'][1]['source'];
-                    $album_cover = $fb->getPhoto($album['cover_photo']);
-                    foreach ($album_cover['images'] as $image) {
-                        if ($image['width']==180) {
-                            $album_cover = $image;
-                            break;
-                        }
-                    }
-                    ?>
-                    <div class="wfalbum_item" id="wfalbum_item_<?php echo $album['id'] ?>" rel="<?php echo $album['id'] ?>">
-                        <a title="" href='#'><img src='<?php echo $album_cover['source'] ?>' border='0' alt="" title="" /></a>
-                        <span><?php echo $album['name'] ?> // <?php echo $album['count']?> photos</span>
-                    </div>
-                    <?php
-                }
-                ?>
+                <img  src="<?php echo $wpfb_album->pluginUrl?>assets/images/spin.gif" alt="Loading..." />
             </div>
             <div class="clear"></div>
             <div class="wf-control">
-                <a href="#" id="wfalbum-clear-cache">Clear Cache</a>
+                <a href="#" id="wf-clear-cache">Clear Cache</a>
                 &nbsp;&nbsp;&nbsp;
                 <input type="button" class="button-primary wf-next" value="Next" />
             </div>

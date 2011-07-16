@@ -41,7 +41,14 @@ class WfalbumHelperCore {
         }
         return null;
     }
-
+    
+    /**
+     * Get access token and facebook user id of current login user
+     * @todo Get access token of any users
+     * @staticvar array $token
+     * @return FALSE if no valid token
+     *          array($fbuid, $access_token) 
+     */
     static public function getFbToken() {
         static $token = array();
         if (!$token) {

@@ -29,8 +29,9 @@ class WfalbumActionCore {
      */
     public static function media_button($context) {
         global $wpfb_album;
+        global $page;
         $image_url = $wpfb_album->pluginUrl . '/assets/images/media-button.png';
-        $more = '<a href="#TB_inline?width=580&height=500&inlineId=wfalbum_form" class="thickbox" title="Insert Facebook Album"><img src="' . $image_url . '" alt="Insert Facebook Album" /></a>';
+        $more = '<a id="media_wf_album" href="#TB_inline?width=580&height=500&inlineId=wfalbum_form" class="thickbox" title="Insert Facebook Album"><img src="' . $image_url . '" alt="Insert Facebook Album" /></a>';
         return $context . $more;
     }
 
@@ -87,6 +88,15 @@ class WfalbumActionCore {
 
     public static function shutdown() {
         ob_end_flush();
+    }
+
+    /**
+     * Action to load albuns via Ajax!
+     * Actually, this method will execute a controller request
+     */
+    public static function load_albums() {
+        Wfalbum::singleton()->handleBackendAction('wfalbum/front/load_albums');
+        exit;
     }
 
 }

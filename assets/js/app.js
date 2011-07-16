@@ -29,7 +29,18 @@ window.wfapp = {};
          * Load Album via Ajax
          */
         load : function () {
+            $('#wfalbum_list', wfapp.wrap).html('Loading...');
             
+            $.ajax({
+                'url' : wfalbum.ajaxurl,
+                data : {
+                    'action' : 'wf_load_albums'
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#wfalbum_list', wfapp.wrap).html(data);
+                }
+            })
         },
         
         /**
@@ -105,6 +116,11 @@ window.wfapp = {};
                 $('.wf_option_panel', $wrap).hide();
                 $('.wf_option_panel#wf_option_' + theme, $wrap).show();
             })
+            
+            $('#wf-clear-cache, #media_wf_album').click(function () {
+                wfapp.load();
+            })
+            
         }
     }
     

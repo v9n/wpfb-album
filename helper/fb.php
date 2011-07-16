@@ -35,7 +35,7 @@ class WfalbumHelperFb {
     public function getAuthUrl() {
         $url = "http://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s&scope=";
         $redirect_url = $this->conf['canvas']['page'] . '?domain=' . get_bloginfo('url') . '&uid=' . get_current_user_id();
-        return sprintf($url, $this->conf['core']['id'], urlencode($redirect_url) , $this->conf['scope']);
+        return sprintf($url, $this->conf['core']['id'], urlencode($redirect_url), $this->conf['scope']);
         //return "http://www.facebook.com/dialog/oauth?client_id=" . $this->conf['core']['id'] . "&redirect_uri=" . urlencode($this->conf['canvas']['page']) . '&scope=' . $this->conf['scope'];
     }
 
@@ -81,17 +81,29 @@ class WfalbumHelperFb {
         }
         return $this->_api;
     }
-
     
+    /**
+     * get album of current user!
+     * 
+     * @param type $fuid
+     * @return 
+     *  array of album!
+     *  false if current user has not valid token         
+     */
     public function getAlbums($fuid='') {
         if (!($albums = Axche::get('album_' . get_current_user_id(), 'wfalbum'))) {
             echo 'not in cache';
-            $albums = $this->getApi()->api('624804112/albums', 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
-            Axche::set('album_' . get_current_user_id(), $albums, 'wfalbum');
+            $token = WfalbumHelperCore::getFbToken();
+            if ($token && count($token)==2) {
+                $albums = $this->getApi()->api($token[0] . '/albums', 'GET', array('access_token' => $token[1]));
+                Axche::set('album_' . get_current_user_id(), $albums, 'wfalbum');
+            } else {
+                return false;
+            }
         }
         return $albums;
     }
-    
+
     public function getPhotos($album_id) {
         if (!($photos = Axche::get('album_' . $album_id, 'wfalbum'))) {
             echo 'not in cache';
@@ -100,16 +112,15 @@ class WfalbumHelperFb {
         }
         return $photos;
     }
-    
+
     public function getPhoto($photo_id) {
         if (!($photo = Axche::get('photo_' . $photo_id, 'wfalbum'))) {
             echo 'not in cache';
             $photo = $this->getApi()->api($photo_id, 'GET', array('access_token' => get_option('wfalbum_fb_access_token')));
             Axche::set('photo_' . $photo_id, $photo, 'wfalbum');
         }
-        
+
         return $photo;
     }
-    
 
 }

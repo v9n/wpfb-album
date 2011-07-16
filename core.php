@@ -26,7 +26,7 @@ class Wfalbum {
 
     public function init() {
         Axche::init(array('dir' => $this->pluginPath . 'cache/'));
-        
+
         if (count($this->styles)) {
             foreach ($this->styles as $name => $style) {
                 wp_register_style($name, $this->pluginUrl . $style[0], $style[1], $style[2], $style[3]);
@@ -84,6 +84,8 @@ class Wfalbum {
         add_action('get_header', array($this, 'handleFrontendAction'));
 
         add_action('media_buttons_context', array('WfalbumActionCore', 'media_button'));
+
+        add_action('wp_ajax_wf_load_albums', array('WfalbumActionCore', 'load_albums'));
     }
 
     /**
@@ -94,7 +96,6 @@ class Wfalbum {
      */
     public function execute($uri='', $dir='admin/') {
         //echo 'lol', get_query_var('axcotouri'), 'lol';
-
         $this->router = array();
         $this->router['controller'] = 'front';
         $this->router['method'] = 'index';
@@ -109,6 +110,7 @@ class Wfalbum {
         array_shift($part);
         $param = $part;
 
+
         if (!file_exists($this->pluginPath . '/controller/' . $dir . $this->router['controller'] . '.php')) {
             $this->router['controller'] = 'front';
         }
@@ -116,22 +118,28 @@ class Wfalbum {
         $className = 'Wfalbum' . ucfirst($this->router['controller']) . 'Controller';
 
         $this->responser = new $className;
-
         if (!method_exists($this->responser, 'action_' . $this->router['method'])) {
             $param = array_merge(array($this->router['method']), $param);
             $this->router['method'] = 'index';
         }
-        echo call_user_func_array(array(&$this->responser, 'action_' . $this->router['method']), $param);
+        return call_user_func_array(array(&$this->responser, 'action_' . $this->router['method']), $param);
     }
 
     /**
      * This is main  entry point for all request come to WordPress backend! It then call execute() to execure requesr
      */
-    public function handleBackendAction() {
-        $uri = empty($_GET['uri']) ? (empty($_GET['page']) ? 'front' : $_GET['page']) : $_GET['uri'];
+    public function handleBackendAction($uri='', $echo=true) {
+        if (!$uri) {
+            $uri = empty($_GET['uri']) ? (empty($_GET['page']) ? 'front' : $_GET['page']) : $_GET['uri'];
+        }
+        
         $part = explode('/', $uri, 2);
         if ($part[0] == $this->routerPrefix) {
-            $this->execute(WfalbumHelperCore::e($part[1], ''), '');
+            if ($echo) {
+                echo $this->execute(WfalbumHelperCore::g($part[1], ''), '');
+            } else {
+                return $this->execute(WfalbumHelperCore::g($part[1], ''), '');
+            }
         }
     }
 
