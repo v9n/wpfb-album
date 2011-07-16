@@ -14,8 +14,8 @@ ul.list li {display: inline-block;}
 
 
 /*Admin Css*/
-#wfalbum_form {
-
+#wfalbum_form, #wfalbum_form p {
+    text-align: center
 }
 
 #wfalbum_container {display: block}
