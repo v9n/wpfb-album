@@ -119,16 +119,18 @@ window.wfapp = {};
                 $('.wf_option_panel#wf_option_' + theme, $wrap).show();
             })
             
-            $('#wf-clear-cache, #media_wf_album').click(function () {
+            $('#wf-clear-cache, #media_wf_album').click(function (e) {
+                e.preventDefault();
                 wfapp.showForm();
             })
             
         },
         
         selectedAlbum : function () {
-            $('.wfalbum_item', wfapp.list).click(function () {
+            $('.wfalbum_item > a', wfapp.list).click(function (e) {
+                e.preventDefault();
                 $('.wfalbum_item', wfapp.list).removeClass('selected');
-                $(this).addClass('selected');
+                $(this).parent().addClass('selected');
             })
           
         }

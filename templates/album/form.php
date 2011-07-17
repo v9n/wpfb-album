@@ -1,30 +1,35 @@
 <div id="wfalbum_form">
     <div class="wfalbum_wrap">
         <div id="wfalbum_container">
-            <div id="wfalbum_list">
-                <img  src="<?php echo $wpfb_album->pluginUrl?>assets/images/spin.gif" alt="Loading..." />
+
+            <div id="wfalbum_list_wrap">
+                <div id="wfalbum_list">
+                    <img  src="<?php echo $wpfb_album->pluginUrl ?>assets/images/spin.gif" alt="Loading..." />
+                </div>
             </div>
             <div class="clear"></div>
             <div class="wf-control">
                 <a class="button" href="#" id="wf-clear-cache">Clear Cache</a>
                 &nbsp;&nbsp;&nbsp;
-                <a class="button-primary wf-next">Next</a>
+                <a class="button wf-next">Next</a>
             </div>
 
         </div>
 
         <div id="wfalbum_option">
-            <label>Choose A Gallery/Slider:</label>
-            <select name="plugin" id="wf-plugin">
-                <?php
-                foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
-                    ?>
-                    <option value="<?php echo $plugin['id'] ?>"><?php echo $plugin['name'] ?></option>
+            <div class="wf-control">
+                <label>Choose A Gallery/Slider:</label>
+                <select name="plugin" id="wf-plugin">
                     <?php
-                endforeach
-                ?>                    
-            </select>
-
+                    foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
+                        ?>
+                        <option value="<?php echo $plugin['id'] ?>"><?php echo $plugin['name'] ?></option>
+                        <?php
+                    endforeach
+                    ?>                    
+                </select>
+            </div>
+            
             <div id="wf_option_container">
                 <?php
                 //Display option panel
@@ -41,8 +46,8 @@
             </div>
 
             <div class="wf-control">
-                <input type="button" class="button-primary wf-back" value="Previous" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="button" class="button-primary" value="Insert Album" id="wf-inserter"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="button wf-back">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="button" id="wf-inserter">Insert Album</a>
             </div>
         </div>
 

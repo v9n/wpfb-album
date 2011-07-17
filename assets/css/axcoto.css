@@ -21,8 +21,20 @@ ul.list li {display: inline-block;}
 
 #wfalbum_container {display: block}
 #wfalbum_option {display: none}
+#wfalbum_list_wrap {
+    margin: 0 0 25px 0;
+    padding: 5px;
+    border: 1px;
+    border-color: #DFDFDF;
+    border-radius: 3px 3px 3px 3px;
+    -moz-box-shadow:inset 0 0 10px #000000;
+    -webkit-box-shadow:inset 0 0 10px #000000;
+    box-shadow:inset 0 0 5px #000000;
+    height: 450px; overflow: auto;
+    width: 630px;
+}
 #wfalbum_list {
-    padding: 0px; width: 570px; 
+    padding: 0px; width: 627px; margin: 0 ;
     height: 450px; overflow: auto;
 }
 
@@ -34,7 +46,7 @@ ul.list li {display: inline-block;}
     margin: 5px;
     padding: 0px;
     float: left;
-    width: 164px;
+    width: 184px;
 }
 
 #wfalbum_list .wfalbum_item:hover, #wfalbum_list .wfalbum_item.selected {
@@ -44,8 +56,8 @@ ul.list li {display: inline-block;}
 }
 
 #wfalbum_list .wfalbum_item a{
-    display: block; margin: 1px auto 0 auto;
-    width: 160px; height: 130px; overflow: hidden;
+    display: block; margin: 10px auto 0 auto;
+    width: 158px; height: 130px; overflow: hidden;
 }
 #wfalbum_list .wfalbum_item img{
     display: block; margin: 0 auto;
@@ -64,4 +76,10 @@ ul.list li {display: inline-block;}
 
 .wfalbum_wrap .wf-control{
     text-align: center; margin-top: 5px;
+}
+
+.wf_option_panel {
+    border: 1px solid #666;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
 }
