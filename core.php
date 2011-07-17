@@ -25,7 +25,7 @@ class Wfalbum {
     }
 
     public function init() {
-        Axche::init(array('dir' => $this->pluginPath . 'cache/'));
+        Axche::init(array('dir' => $this->pluginPath . 'cache/', 'exp' => 3000));
 
         if (count($this->styles)) {
             foreach ($this->styles as $name => $style) {
