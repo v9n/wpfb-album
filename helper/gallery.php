@@ -93,7 +93,17 @@ class WfalbumHelperGallery {
                 if (empty(self::$_drivers[$theme])) {
                     self::$_drivers[$theme] = new $classname();
                 }
-                return self::$_drivers[$theme]->render($photos, $atts);
+                if (!empty($atts['pref'])) {
+                    $_plugInOpts = explode(' ', $atts['pref']);
+                    foreach ($_plugInOpts as $value) {
+                        $value=explode('=', $value, 2);
+                        $plugInOpts[$value[0]] = $value[1];
+                    }
+                } else {
+                    $plugInOpts = array();
+                }
+
+                return self::$_drivers[$theme]->render($photos, $plugInOpts);
             }
         }
     }

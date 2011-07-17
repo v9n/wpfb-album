@@ -96,3 +96,7 @@ ul.list li {display: inline-block;}
     width: 50px;
 }
 .wf_option_panel .wf_pref_item {width: 250px;}
+
+/*hack galleria error*/
+.galleria-lightbox-content .galleria-image img, .galleria-lightbox-content .galleria-lightbox-info {opacity: 1 !important;}
+ 

@@ -22,20 +22,22 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
      * Render preference setting box for this plugin
      */
     static function preference() {
-        self::field('text', 'Width', 'width');
-        self::field('text', 'Height', 'height');
         ?>      
 
         <div class="wf_pref_item">
-            <label>Autoplay (milliseconds)</label>
-            <input type="text" name="autoplay" value="" /
-        </div>
-        <div class="wf_pref_item"
-             <label>Carousel Speed (in milliseconds)</label>
-            <input type="checkbox" name="carousel" value="" />
+            <?php self::field('text', 'Width', 'width'); ?>
         </div>
         <div class="wf_pref_item">
-            <?php self::field('select', 'Easing', 'easing', array(0 => 'default', 'galleria' => 'Galleria', 'galleriaIn' => 'Galleria In', 'galleriaOut' => 'Galleria Out')); ?>
+            <?php self::field('text', 'Height', 'height'); ?>
+        </div>
+        <div class="wf_pref_item">
+            <?php self::field('text', 'Interval Playing (in milliseconds)', 'autoplay'); ?>
+        </div>
+        <div class="wf_pref_item">
+            <?php self::field('text', 'Carousel Speed (in milliseconds)', 'carouselSpeed'); ?>
+        </div>
+        <div class="wf_pref_item">
+            <?php self::field('select', 'Easing', 'easing', array(0 => 'default', 'galleriaIn' => 'Galleria In', 'galleriaOut' => 'Galleria Out')); ?>
         </div>
         <div class="wf_pref_item">
             <?php self::field('select', 'Image Crop', 'imageCrop', array(0 => 'default', 'true', 'height', 'width')); ?>
@@ -50,11 +52,10 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
             <?php self::field('checkbox', 'Lightbox', 'lightbox', 'true'); ?>
         </div>
         <div class="wf_pref_item">
-        </div>
-        <?php self::field('text', 'Lightbox Fade Speep (in milliseconds)', 'lightboxFadeSpeed'); ?>
+            <?php self::field('text', 'Lightbox Fade Speep (in milliseconds)', 'lightboxFadeSpeed'); ?>
         </div>        
         <div class="wf_pref_item">
-            <?php self::field('text', 'Overlay Opacity', 'overlayOpacity'); ?>
+            <?php self::field('text', 'Overlay Opacity (0-1)', 'overlayOpacity'); ?>
         </div>
         <div class="wf_pref_item">
             <?php self::field('checkbox', 'Hide Capion', 'showInfo', 'false'); ?>
@@ -71,22 +72,35 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
         <div class="wf_pref_item">
             <?php self::field('text', 'Transition Speed (in milliseconds), The higher number, the slower transition.', 'transitionSpeed'); ?>
         </div>
-        <div class="wf_pref_item">
-            <label>Counter</label>
-            <input type="checkbox" name="autoplay" value="" />
-        </div>
 
         <?php
     }
 
     public function render($photos, $atts=NULL) {
+        $translate = array(
+            
+        );
         static $i = 0;
         $i++;
         $instance = 'wf_render_' . $i;
+        var_dump($atts);
+        if (is_array($atts)) {
+            $options = array();
+            foreach ($atts as $optName => $optVal) {
+                echo $optVal, ' ';
+                if ($optVal == 'false' || $optVal == 'true' || is_numeric($optVal)) {
+                    $options[] = "$optName:$optVal";
+                } else {
+                    $options[] = "$optName:'$optVal'";
+                }
+            }
+            $options = $options ? implode(", ", $options) : '';
+        }
+        
         ?>
         <div id="<?php echo $instance ?>">
             <?php foreach ($photos['data'] as $photo) : ?>    
-                <a href="#<?php //echo $photo['name']       ?>"><img title="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'], '')); ?>" alt="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'])); ?>&quote;" src="<?php echo $photo['images'][0]['source'] ?>"></a>
+                <a title="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'], '')); ?>" href="<?php echo $photo['images'][0]['source'] ?>"><img  alt="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'])); ?>&quote;" src="<?php echo $photo['images'][0]['source'] ?>"></a>
             <?php endforeach; ?>    
         </div>
         <script>
@@ -96,9 +110,7 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
                     Galleria.loadTheme('<?php echo Wfalbum::singleton()->url('helper/gallery/galleria/themes/classic/galleria.classic.min.js') ?>');
 
                     // Initialize Galleria
-                    $('#<?php echo $instance ?>').galleria({
-                        height: 320
-                    });
+                    $('#<?php echo $instance ?>').galleria({<?php echo $options ?>});
                 })  
             })(jQuery);
         </script>

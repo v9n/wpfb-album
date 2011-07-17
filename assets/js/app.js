@@ -83,16 +83,16 @@ window.wfapp = {};
                 alert('Please choose a display type first');
             }
             prop.theme = $('#wf-plugin > option:selected', wfapp.wrap).val();
-            
+
+            typeof(wfapp.fn.builder[prop.theme])!='undefined' && (pref = wfapp.fn.builder[prop.theme]()) && (prop.pref = pref);
+
             for (x in prop) {
                 var pro = [
                 x, '="', prop[x], '"'  
                 ];
                 shortcode.push(pro.join('')); 
             }
-            
-            typeof(wfapp.fn.builder[prop.theme])!='undefined' && (pref = wfapp.fn.builder[prop.theme]()) && shortcode.push(pref);
-                            
+                                        
             shortcode =  ['[','wfalbum ', shortcode.join(" "), ']'].join('');
             var wdw = window.dialogArguments || opener || parent || top;
             wdw.send_to_editor(shortcode);
