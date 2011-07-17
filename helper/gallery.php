@@ -40,7 +40,6 @@ class WfalbumHelperGallery {
 
                         method_exists($classname, 'bootstrap') && $classname::bootstrap();
                         method_exists($classname, 'preference') && add_action('wfalbum_plugin_' . $pluginInfo['id'], array($classname, 'preference'));
-                        
                     } else {
                         //@TODO Add warning or log message here
                         WfalbumHelperCore::log($classname . ' is missing ::info() method');
@@ -99,6 +98,66 @@ class WfalbumHelperGallery {
         }
     }
 
+    static public function field($type, $label, $name, $value=NULL, $attb=array()) {
+        !is_array($attb) && $attb = array();
+        $defaultAttb = array(
+            'id' => 'wf_pref_' . uniqid()
+        );
+        $attb = array_merge($defaultAttb, $attb);
+        echo sprintf("<label for='%s'>%s</label>", $attb['id'], $label);
+        switch ($type) {
+            case 'text':
+                echo sprintf("<input id='%s' type='text' name='%s' value='%s' %s />", $attb['id'], esc_attr($name), esc_attr($value), self::attributes($attb));
+                break;
+            case 'select':
+                $html = sprintf("<select name='%s' id='%s'>", esc_attr($name), $attb['id']);
+                if (is_array($value)) {
+                    foreach ($value as $option => $txt) {
+                        if (is_int($option)) {
+                            $option = $txt;
+                        }
+                        $html .= sprintf("<option value='%s'>%s</option>", esc_attr($option), esc_attr($txt));
+                    }
+                }
+                $html .= "</select>";
+                echo $html;
+                break;
+            case 'checkbox':
+                echo sprintf("<input id='%s' type='checkbox' name='%s' value='%s' %s />", $attb['id'], esc_attr($name), esc_attr($value), self::attributes($attb));
+                break;
+            case 'radio':
+                if (is_array($value)) {
+                    foreach ($value as $option => $txt) {
+                        echo sprintf("<input type='radio' name='%s' value='%s' %s /><span>%s</span>", esc_attr($name), esc_attr($option), self::attributes($attb), $txt);
+                    }
+                }
+                break;
+        }
+    }
+
+    public static function attributes(array $attributes = NULL) {
+        if (empty($attributes))
+            return '';
+
+        $compiled = '';
+        foreach ($attributes as $key => $value) {
+            if ($value === NULL) {
+                // Skip attributes that have NULL values
+                continue;
+            }
+
+            if (is_int($key)) {
+                // Assume non-associative keys are mirrored attributes
+                $key = $value;
+            }
+
+            // Add the attribute value
+            $compiled .= ' ' . $key . '="' . esc_attr($value) . '"';
+        }
+
+        return $compiled;
+    }
+
 }
 
 interface iWfalbumHelperGallery {
@@ -112,13 +171,13 @@ interface iWfalbumHelperGallery {
      * Plugin can overwrite this funciton load addtional resources (script, style)! For example, each plugin has its own style and script..
      */
     static function bootstrap();
+
     /**
      * When users choose to use a plugin (theme in other word),
      * each plugin can have its own option so each plugin can implement this method to render
      * option box
      */
     static function preference();
-    
+
     function render($photo, $atts=NULL);
-    
 }
