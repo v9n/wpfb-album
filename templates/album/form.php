@@ -20,7 +20,7 @@
             <div id="wfalbum_option">
                 <div class="wf-control">
                     <a class="button wf-back">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;                    
-                    <label>Choose A Gallery/Slider, set preference then Insert</label>
+                    <label>Choose a gallery/slider type, set preference, then insert</label>
                     <select name="plugin" id="wf-plugin">
                         <option value="0">Select Plugin</option>
                         <?php

@@ -66,6 +66,7 @@ ul.list li {display: inline-block;}
     display: block; margin: 0 auto;
 }
 #wfalbum_list .wfalbum_item  span{
+    cursor: pointer;
     color: #666666 !important;
     display: block;
     font-family: arial;
