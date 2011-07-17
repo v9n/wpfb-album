@@ -91,3 +91,8 @@ ul.list li {display: inline-block;}
     border-radius: 3px;
     -moz-border-radius: 3px;
 }
+
+.wf_option_panel input[type="text"] {
+    width: 50px;
+}
+.wf_option_panel .wf_pref_item {width: 250px;}
