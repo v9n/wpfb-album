@@ -12,7 +12,6 @@
 ul.list {}
 ul.list li {display: inline-block;}
 
-
 /*Admin Css*/
 #wfalbum_form {
     text-align: center
@@ -25,7 +24,8 @@ ul.list li {display: inline-block;}
     padding: 5px;
     border: 1px;
     border-color: #DFDFDF;
-    border-radius: 3px 3px 3px 3px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
     -moz-box-shadow:inset 0 0 10px #000000;
     -webkit-box-shadow:inset 0 0 10px #000000;
     box-shadow:inset 0 0 5px #000000;
@@ -42,7 +42,7 @@ ul.list li {display: inline-block;}
     border: 1px solid #DDDDDD;
     border-radius: 2px 2px 2px 2px;
     box-shadow: 0 1px 0 #AAAAAA;
-    margin: 5px;
+    margin: 5px 7px;
     padding: 0px;
     float: left;
     width: 180px;
@@ -57,6 +57,10 @@ ul.list li {display: inline-block;}
 #wfalbum_list .wfalbum_item a{
     display: block; margin: 10px auto 0 auto;
     width: 158px; height: 130px; overflow: hidden;
+    box-shadow: 5px 5px #888;
+    -moz-box-shadow: 5px 5px #888;
+    -webkit-box-shadow: 5px 5px #888;
+    
 }
 #wfalbum_list .wfalbum_item img{
     display: block; margin: 0 auto;
@@ -71,6 +75,7 @@ ul.list li {display: inline-block;}
     padding: 4px 0 1px 0;
     text-align: center;   
     overflow: hidden; 
+    height: 1.5em;
 }
 
 .wfalbum_wrap .wf-control{

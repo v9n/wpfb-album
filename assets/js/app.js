@@ -103,9 +103,13 @@ window.wfapp = {};
             var $wrap = wfapp.wrap = $('.wfalbum_wrap', '#wfalbum_form');
             var $list = wfapp.list = $('#wfalbum_list', $wrap);
                 
-            $('.wf-next', $wrap).click(function () {
+            $('.wf-next', $wrap).click(function (e) {
+                e.preventDefault();
                 //Choose a album first
-                //???
+                if ($('.wfalbum_item.selected', $list).length==0) {
+                    alert('You need to select an album first')
+                    return false;
+                }
                 $('#wfalbum_container', $wrap).fadeOut('fast');
                 $('#wfalbum_option', $wrap).fadeIn('fast');
             })
