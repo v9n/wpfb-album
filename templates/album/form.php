@@ -20,9 +20,9 @@
             <div id="wfalbum_option">
                 <div class="wf-control">
                     <a class="button wf-back">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;                    
-                    <label>Choose a gallery/slider type, set preference, then insert</label>
+                    <label>Choose an album display mode, define preference, then insert</label>
                     <select name="plugin" id="wf-plugin">
-                        <option value="0">Select Plugin</option>
+                        <option value="0">Album Display Mode</option>
                         <?php
                         foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
                             ?>

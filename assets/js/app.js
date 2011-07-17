@@ -79,6 +79,9 @@ window.wfapp = {};
             var shortcode = [];
             var prop = {};
             prop.id = $('.wfalbum_item.selected', wfapp.list).attr('rel');
+            if (!prop.id || prop.id==0) {
+                alert('Please choose a display type first');
+            }
             prop.theme = $('#wf-plugin > option:selected', wfapp.wrap).val();
             
             for (x in prop) {
