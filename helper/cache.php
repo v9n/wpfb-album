@@ -53,6 +53,7 @@ if (!class_exists('Axche')) {
                 return $default;
             }
             $content = explode("\n", $content, 2);
+            $content[0] = (int)$content[0];
             if (time()>=$content[0]) {
                 //Cache is expired, clear it
                 @unlink($cachefile);
