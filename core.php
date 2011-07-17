@@ -236,12 +236,13 @@ class Wfalbum {
     public $baseSlug = 'wfalbum';
     public $styles = array(
         'wfalbum-all' => array('assets/css/axcoto.css', NULL, '1.0.0', 'all', 'auto'),
+        'colorbox' => array('assets/js/colorbox/colorbox.css', NULL, '1.0.0', 'all', 'auto'),
     );
     public $scripts = array(
         //src, depend, version, in footer, [admin|frontend]
         //If set 5th element to admin or frontend it will autoload
         'wfalbum-app-core' => array('assets/js/app.js', array('jquery'), '1.0.0', true, 'auto'),
-        'masonry' => array('assets/js/jquery.masonry.min.js', array('jquery'), '1.0.0', true, 'admin'),
+        'colorbox' => array('assets/js/colorbox/jquery.colorbox-min.js', array('jquery'), '1.0.0', true, 'admin'),
     );
 
 }

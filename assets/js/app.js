@@ -93,6 +93,11 @@ window.wfapp = {};
         },
             
         init : function () {
+            $('#media_wf_album').length && $('#media_wf_album').colorbox({  
+                width:"80%", 
+                inline:true, 
+                href:"#wfalbum_form"
+            });
             
             var $wrap = wfapp.wrap = $('.wfalbum_wrap', '#wfalbum_form');
             var $list = wfapp.list = $('#wfalbum_list', $wrap);

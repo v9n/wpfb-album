@@ -15,7 +15,6 @@ ul.list li {display: inline-block;}
 
 /*Admin Css*/
 #wfalbum_form {
-    display: none;
     text-align: center
 }
 
@@ -31,10 +30,10 @@ ul.list li {display: inline-block;}
     -webkit-box-shadow:inset 0 0 10px #000000;
     box-shadow:inset 0 0 5px #000000;
     height: 450px; overflow: auto;
-    width: 630px;
+    width: 582px;
 }
 #wfalbum_list {
-    padding: 0px; width: 627px; margin: 0 ;
+    padding: 0px; width: 582px; margin: 0 ;
     height: 450px; overflow: auto;
 }
 
@@ -46,7 +45,7 @@ ul.list li {display: inline-block;}
     margin: 5px;
     padding: 0px;
     float: left;
-    width: 184px;
+    width: 180px;
 }
 
 #wfalbum_list .wfalbum_item:hover, #wfalbum_list .wfalbum_item.selected {
