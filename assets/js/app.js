@@ -104,7 +104,7 @@ window.wfapp = {};
             
         init : function () {
             $('#media_wf_album').length && $('#media_wf_album').colorbox({  
-                width:"80%", 
+                width:"900px", 
                 inline:true, 
                 height: '560px',
                 href:"#wfalbum_form"
