@@ -96,6 +96,7 @@ window.wfapp = {};
             $('#media_wf_album').length && $('#media_wf_album').colorbox({  
                 width:"80%", 
                 inline:true, 
+                height: '560px',
                 href:"#wfalbum_form"
             });
             

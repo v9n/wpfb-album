@@ -29,12 +29,12 @@ ul.list li {display: inline-block;}
     -moz-box-shadow:inset 0 0 10px #000000;
     -webkit-box-shadow:inset 0 0 10px #000000;
     box-shadow:inset 0 0 5px #000000;
-    height: 450px; overflow: auto;
-    width: 582px;
+    height: 410px; overflow: auto;
+    
 }
 #wfalbum_list {
-    padding: 0px; width: 582px; margin: 0 ;
-    height: 450px; overflow: auto;
+    padding: 0px; margin: 0 ;
+    height: 400px; overflow: auto;
 }
 
 #wfalbum_list .wfalbum_item {
