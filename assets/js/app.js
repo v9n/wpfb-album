@@ -37,14 +37,16 @@ window.wfapp = {};
         
         /**
          * Load Album via Ajax
+         * @augments boolean true or false to force clean cache and get fresh data
          */
-        load : function () {
+        load : function (force) {
             $('#wfalbum_list', wfapp.wrap).html('Loading...');
             
             $.ajax({
                 'url' : wfalbum.ajaxurl,
                 data : {
-                    'action' : 'wf_load_albums'
+                    'action' : 'wf_load_albums',
+                    'force' : force==undefined? 0:1
                 },
                 success: function (data) {
                     $('#wfalbum_list', wfapp.wrap).html(data);
@@ -86,7 +88,7 @@ window.wfapp = {};
             shortcode =  ['[','wfalbum ', shortcode.join(" "), ']'].join('');
             var wdw = window.dialogArguments || opener || parent || top;
             wdw.send_to_editor(shortcode);
-
+            $.colorbox.close();
             console.log(shortcode);
             console.log(wfapp.fn.builder);
             console.log(wfapp.fn.builder.galleria());
@@ -114,11 +116,13 @@ window.wfapp = {};
                 $('#wfalbum_option', $wrap).fadeIn('fast');
             })
             
-            $('#wf-inserter', $wrap).click(function () {
+            $('#wf-inserter', $wrap).click(function (e) {
+                e.preventDefault();
                 wfapp.insert();
             });
             
-            $('.wf-back', $wrap).click(function () {
+            $('.wf-back', $wrap).click(function (e) {
+                e.preventDefault();
                 $('#wfalbum_option', $wrap).fadeOut('fast');
                 $('#wfalbum_container', $wrap).fadeIn('fast');
             })
@@ -137,7 +141,7 @@ window.wfapp = {};
         },
         
         selectedAlbum : function () {
-            $('.wfalbum_item > a', wfapp.list).click(function (e) {
+            $('.wfalbum_item > a, .wfalbum_item > span', wfapp.list).click(function (e) {
                 e.preventDefault();
                 $('.wfalbum_item', wfapp.list).removeClass('selected');
                 $(this).parent().addClass('selected');

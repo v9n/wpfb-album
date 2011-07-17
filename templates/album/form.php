@@ -19,8 +19,10 @@
 
             <div id="wfalbum_option">
                 <div class="wf-control">
-                    <label>Choose A Gallery/Slider:</label>
+                    <a class="button wf-back">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;                    
+                    <label>Choose A Gallery/Slider, set preference then Insert</label>
                     <select name="plugin" id="wf-plugin">
+                        <option value="0">Select Plugin</option>
                         <?php
                         foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
                             ?>
@@ -29,6 +31,7 @@
                         endforeach
                         ?>                    
                     </select>
+                    <a class="button" id="wf-inserter">Insert Album</a>
                 </div>
 
                 <div id="wf_option_container">
@@ -44,11 +47,6 @@
                         <?php
                     endforeach
                     ?>
-                </div>
-
-                <div class="wf-control">
-                    <a class="button wf-back">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="button" id="wf-inserter">Insert Album</a>
                 </div>
             </div>
 
