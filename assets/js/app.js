@@ -29,10 +29,15 @@ window.wfapp = {};
         /**
          * Show form and switch to album selecting screen
          */
-        showForm : function () {
+        showForm : function (force) {
             $('#wfalbum_option', wfapp.wrap).hide();
             $('#wfalbum_container', wfapp.wrap).show();
-            !wfapp.loaded && wfapp.load();
+            if (typeof(force)=='undefined') {
+                !wfapp.loaded && wfapp.load();
+            } else {
+                wfapp.load(force);
+            }
+            
         }, 
         
         /**
@@ -133,7 +138,11 @@ window.wfapp = {};
                 $('.wf_option_panel#wf_option_' + theme, $wrap).show();
             })
             
-            $('#wf-clear-cache, #media_wf_album').click(function (e) {
+            $('#wf-clear-cache').click(function (e) {
+                e.preventDefault();
+                wfapp.showForm(1);
+            })
+            $('#media_wf_album').click(function (e) {
                 e.preventDefault();
                 wfapp.showForm();
             })

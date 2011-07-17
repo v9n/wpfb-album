@@ -60,6 +60,11 @@ if (!class_exists('Axche')) {
             }
             return unserialize($content[1]);
         }
+        
+        static public function remove($name, $group='default') {
+            $cachefile = (self::$_config['dir'] . $group . '/' . md5($name));
+            return @unlink($cachefile);
+        }
 
     }
 

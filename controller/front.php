@@ -30,13 +30,14 @@ class WfalbumFrontController {
         global $post;
         global $wpdb;
         $fb = WfalbumHelperCore::load('fb', true);
+        $cache = WfalbumHelperCore::g($_REQUEST['force'], 0) == 0;
         if (!$token = WfalbumHelperCore::getFbToken()) {
             include $wpfb_album->pluginPath . 'templates/auth.php';
         } else {
-            $albums = $fb->getAlbums();
+            $albums = $fb->getAlbums(NULL, $cache);
             $count = 0;
             foreach ($albums['data'] as $keys => $album) {
-                $album_cover = $fb->getPhoto($album['cover_photo']);
+                $album_cover = $fb->getPhoto($album['cover_photo'], $cache);
                 foreach ($album_cover['images'] as $image) {
                     if ($image['width'] == 180) {
                         $album_cover = $image;

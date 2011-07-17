@@ -90,7 +90,10 @@ class WfalbumHelperFb {
      *  array of album!
      *  false if current user has not valid token         
      */
-    public function getAlbums($fuid='') {
+    public function getAlbums($fuid='', $cache=true) {
+        if (!$cache) {
+            Axche::remove('album_' . get_current_user_id(), 'wfalbum');
+        }
         if (!($albums = Axche::get('album_' . get_current_user_id(), 'wfalbum'))) {
             echo 'not in cache';
             $token = WfalbumHelperCore::getFbToken();
@@ -104,7 +107,11 @@ class WfalbumHelperFb {
         return $albums;
     }
 
-    public function getPhotos($album_id) {
+    public function getPhotos($album_id, $cache=true) {
+        if (!$cache) {
+            Axche::remove('album_' . $album_id, 'wfalbum');
+        }
+
         if (!($photos = Axche::get('album_' . $album_id, 'wfalbum'))) {
             echo 'not in cache';
             $token = WfalbumHelperCore::getFbToken();
@@ -114,12 +121,15 @@ class WfalbumHelperFb {
             } else {
                 return false;
             }
-                
         }
         return $photos;
     }
 
-    public function getPhoto($photo_id) {
+    public function getPhoto($photo_id, $cache=true) {
+        if (!$cache) {
+            Axche::remove('photo_' . $photo_id, 'wfalbum');
+        }
+
         if (!($photo = Axche::get('photo_' . $photo_id, 'wfalbum'))) {
             echo 'not in cache';
             $token = WfalbumHelperCore::getFbToken();
