@@ -8,7 +8,8 @@
 class WfalbumHelperGallerySample extends WfalbumHelperGallery {
     static public function info() {
         return array(
-            'id' => 'sample', //Should be in low-case without any special character, and unique too! So, be catefully when choosing a id
+            //THIS IS A SAMPLE PLUGIN. SO I DID"T PUT ITS ID HERE! THIS LEADS TO IT WILL NOT APPEAR
+            //'id' => 'sample', //Should be in low-case without any special character, and unique too! So, be catefully when choosing a id
             'name' => 'Sample' //Any text to identify or name your plugin
         );
     }
