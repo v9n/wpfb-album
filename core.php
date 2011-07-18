@@ -54,6 +54,7 @@ class Wfalbum {
         wp_localize_script('wfalbum-app-core', 'wfalbum', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'url' => get_bloginfo('url'),
+            'pluginUrl' => $this->pluginUrl
         ));
 
         /**
