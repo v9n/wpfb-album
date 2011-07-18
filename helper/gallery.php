@@ -9,7 +9,7 @@ class WfalbumHelperGallery {
 
     static protected $_plugins = array();
     static protected $_drivers = array();
-
+    static protected $_insNum = 0;
     /**
      * Load all gallery plugins!
      * Each gallery plugin must have a bootstrap method since they implement iWfalbumHelperGallery
@@ -78,17 +78,18 @@ class WfalbumHelperGallery {
 
         $album_id = WfalbumHelperCore::g($atts['id'], null);
         $theme = WfalbumHelperCore::g($atts['theme'], 'galleria');
+        
         $classname = 'WfalbumHelperGallery' . ucfirst($theme);
-        if (class_exists($classname)) {
+        if (!class_exists($classname)) {
             //fallback to default plugin
             $classname = 'WfalbumHelperGalleryGalleria';
             ;
         }
-
         if ($album_id) {
             //Load photo of album then pass to driver
             $photos = $fb->getPhotos($album_id);
             if ($photos['data']) {
+                echo $classname;
                 //Load corresponding driver for render
                 if (empty(self::$_drivers[$theme])) {
                     self::$_drivers[$theme] = new $classname();
