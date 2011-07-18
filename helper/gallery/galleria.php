@@ -77,9 +77,8 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
     }
 
     public function render($photos, $atts=NULL) {
-        static $i = 0;
-        $i++;
-        $instance = 'wf_render_' . $i;
+        self::$_insNum++;
+        $instance = 'wf_render_' . self::$_insNum;
         if (is_array($atts)) {
             $options = array();
             foreach ($atts as $optName => $optVal) {
