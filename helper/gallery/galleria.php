@@ -77,20 +77,8 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
     }
 
     public function render($photos, $atts=NULL, $optString=NULL) {
-        ob_start();
-        self::$_insNum++;
         $instance = 'wf_render_' . self::$_insNum;
-        if (is_array($atts)) {
-            $options = array();
-            foreach ($atts as $optName => $optVal) {
-                if ($optVal == 'false' || $optVal == 'true' || is_numeric($optVal)) {
-                    $options[] = "$optName:$optVal";
-                } else {
-                    $options[] = "$optName:'$optVal'";
-                }
-            }
-            $options = $options ? implode(", ", $options) : '';
-        }
+        $options = self::_sanitizeOption($atts);
         
         ?>
         <div id="<?php echo $instance ?>">
@@ -110,9 +98,6 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
             })(jQuery);
         </script>
         <?php
-        $content = ob_get_contents();
-        ob_end_clean();
-        return $content;
     }
 
 }
