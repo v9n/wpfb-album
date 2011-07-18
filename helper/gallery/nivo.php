@@ -55,7 +55,6 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
 
     public function render($photos, $atts=NULL) {
         ob_start();
-        self::$_insNum++;
         $instance = 'wf_render_' . self::$_insNum;
         $defaultAtts = array(
             'width' => 500,
@@ -64,15 +63,7 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
         );
         $atts = array_merge($defaultAtts, $atts);
         if (is_array($atts)) {
-            $options = array();
-            foreach ($atts as $optName => $optVal) {
-                if ($optVal == 'false' || $optVal == 'true' || is_numeric($optVal)) {
-                    $options[] = "$optName:$optVal";
-                } else {
-                    $options[] = "$optName:'$optVal'";
-                }
-            }
-            $options = $options ? implode(", ", $options) : '';
+            $options = self::_sanitizeOption($atts);
         }
         ?>
         <style>
