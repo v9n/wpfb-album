@@ -79,11 +79,14 @@ window.wfapp = {};
             var shortcode = [];
             var prop = {};
             prop.id = $('.wfalbum_item.selected', wfapp.list).attr('rel');
-            if (!prop.id || prop.id==0) {
-                alert('Please choose a display type first');
-            }
             prop.theme = $('#wf-plugin > option:selected', wfapp.wrap).val();
-
+            
+            if (!prop.theme || prop.theme==0 || prop.theme=='0') {
+                alert('Please choose a display type first');
+                return false;
+            }
+            
+            
             typeof(wfapp.fn.builder[prop.theme])!='undefined' && (pref = wfapp.fn.builder[prop.theme]()) && (prop.pref = pref);
 
             for (x in prop) {
