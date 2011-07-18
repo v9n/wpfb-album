@@ -92,6 +92,9 @@ ul.list li {display: inline-block;}
     -moz-border-radius: 3px;
 }
 
+.wf_option_panel label{
+    padding-right: 5px;
+}
 .wf_option_panel input[type="text"] {
     width: 50px;
 }
