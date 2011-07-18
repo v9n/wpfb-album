@@ -90,7 +90,6 @@ window.wfapp = {};
                 return false;
             }
             
-            
             typeof(wfapp.fn.builder[prop.theme])!='undefined' && (pref = wfapp.fn.builder[prop.theme]()) && (prop.pref = pref);
 
             for (x in prop) {
@@ -104,9 +103,6 @@ window.wfapp = {};
             var wdw = window.dialogArguments || opener || parent || top;
             wdw.send_to_editor(shortcode);
             $.colorbox.close();
-            console.log(shortcode);
-            console.log(wfapp.fn.builder);
-            console.log(wfapp.fn.builder.galleria());
         },
             
         init : function () {
