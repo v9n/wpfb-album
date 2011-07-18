@@ -18,12 +18,19 @@ include 'helper/cache.php';
 
 class Wfalbum {
 
+    /**
+     * Construct Wfalbum plugin, set pluginName, pluginUrl, pluginPath
+     */
     public function __construct() {
         $this->pluginName = dirname(plugin_basename(__FILE__));
         $this->pluginUrl = WP_PLUGIN_URL . "/$this->pluginName/";
         $this->pluginPath = WP_PLUGIN_DIR . "/$this->pluginName/";
     }
 
+    /**
+     * Init cache class!
+     * Load all styles, script, define JavaScript var with useful URL
+     */
     public function init() {
         Axche::init(array('dir' => $this->pluginPath . 'cache/', 'exp' => 3000));
 
@@ -191,7 +198,8 @@ class Wfalbum {
     }
 
     /**
-     *
+     * Always return the same instance of plugin so we can access its property and its method
+     * from anywhere
      * @return Wfalbum
      */
     static public function singleton() {
