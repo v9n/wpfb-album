@@ -41,6 +41,21 @@ window.wfapp = {};
         }, 
         
         /**
+         * Only case we call this is on Auth form! At that time, 2 tasks have done!
+         * 1.open Facebook app for authorizing!
+         * 2.Close/Hide colorbox form
+         * After authorized, user closes facebook, back to WP page, and show the form again!
+         * But because the form is loaded before, so wfapp will not load this form again, - The reason for this is to speed up plugin, not need to reload data everytime form shows up-
+         * & still show auth form which loaded before!
+         * So, we set wfapp.loaded to false to force wfapp reload data via AJAX instead of just showing form
+         * 
+         */
+        close : function () {
+            wfapp.loaded = false;
+            $.colorbox.close();
+        },
+        
+        /**
          * Load Album via Ajax
          * @augments boolean true or false to force clean cache and get fresh data
          */
@@ -62,19 +77,8 @@ window.wfapp = {};
         },
         
         /**
-         * Generate shortcode to send to editor
+         * Gen& Insert shortcode
          */
-        genShortCode : function () {
-            var shortcode = [];
-            for (x in wfalbum) {            
-                var pro = [
-                x, '="', wfalbum[x], '"'  
-                ];
-                shortcode.push(pro.join('')); 
-            }
-            return '[' + shortcode.join(" ") + ']';        
-        },
-    
         insert : function () {
             var shortcode = [];
             var prop = {};
@@ -110,8 +114,9 @@ window.wfapp = {};
                 width:"900px", 
                 inline:true, 
                 height: '560px',
-                href:"#wfalbum_form"
-            });
+                href:"#wfalbum_form",
+                onLoad: window['wfapp']['showForm']
+            })
             
             var $wrap = wfapp.wrap = $('.wfalbum_wrap', '#wfalbum_form');
             var $list = wfapp.list = $('#wfalbum_list', $wrap);
@@ -148,10 +153,7 @@ window.wfapp = {};
                 e.preventDefault();
                 wfapp.showForm(1);
             })
-            $('#media_wf_album').click(function (e) {
-                e.preventDefault();
-                wfapp.showForm();
-            })
+            
             
         },
         
