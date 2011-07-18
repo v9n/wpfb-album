@@ -45,7 +45,7 @@ window.wfapp = {};
          * @augments boolean true or false to force clean cache and get fresh data
          */
         load : function (force) {
-            $('#wfalbum_list', wfapp.wrap).html('Loading...');
+            $('#wfalbum_list', wfapp.wrap).html(["<img alt='Loading...' src='", wfalbum.pluginUrl, 'assets/images/spin.gif', '\' />'].join(''));
             
             $.ajax({
                 'url' : wfalbum.ajaxurl,
