@@ -76,9 +76,6 @@ class WfalbumActionCore {
         global $wpfb_album;
         global $post;
         global $wpdb;
-        $fb = WfalbumHelperCore::load('fb', true);
-        $albums = $fb->getAlbums();
-        $count = 0;
         include $wpfb_album->pluginPath . 'templates/album/form.php';
     }
 
