@@ -94,7 +94,7 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
         ?>
         <div id="<?php echo $instance ?>">
             <?php foreach ($photos['data'] as $photo) : ?>    
-                <a title="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'], '')); ?>" href="<?php echo $photo['images'][0]['source'] ?>?t=ti"><img  alt="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'])); ?>&quote;" src="<?php echo $photo['images'][0]['source'] ?>" /></a>
+                <a title="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'], '')); ?>" href="<?php echo $photo['images'][0]['source'] ?>?t=ti"><img  alt="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'])); ?>" src="<?php echo $photo['images'][0]['source'] ?>" /></a>
             <?php endforeach; ?>    
         </div>
         <script>
