@@ -67,7 +67,7 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
         }
         ?>
         <style>
-            #<?php echo $instance ?>_wrap {
+            #<?php echo $instance; ?>_wrap {
                 width: <?php echo $atts['width'] ?>px; /* Change this to your images width */
                 height: <?php echo $atts['height'] ?>px; /* Change this to your images height */   
             }
