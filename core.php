@@ -178,31 +178,16 @@ class Wfalbum {
     }
 
     public function menu() {
-        add_menu_page('wpfbalbum', 'WP FB Albums', 'manage_options', 'wfalbum/', array(&$this, 'handleBackendAction'), $this->pluginUrl . '/assets/images/icon.png');
-        add_submenu_page('wfalbum/', 'Transaction', 'Transaction', 'manage_options', 'wfalbum/transaction/list', array(&$this, 'handleBackendAction'));
-        add_submenu_page('wfalbum/', 'Setting', 'Setting', 'manage_options', 'wfalbum/setting/index', array('WfalbumOptionCore', 'setting_form'));
+//        add_menu_page('wpfbalbum', 'WP FB Albums', 'manage_options', 'wfalbum/', array(&$this, 'handleBackendAction'), $this->pluginUrl . '/assets/images/icon.png');
+//        add_submenu_page('wfalbum/', 'Setting', 'Setting', 'manage_options', 'wfalbum/setting/index', array('WfalbumOptionCore', 'setting_form'));
     }
 
     public function active() {
         global $wpdb;
-
-//        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-//        $sql = file_get_contents(dirname(__FILE__) . '/install/install.sql');
-//        $sql = str_replace('axcoto_', $wpdb->prefix, $sql);
-//        $sql = explode(';', $sql);
-//        foreach ($sql as $item) {
-//            //dbDelta($item);
-//        }
     }
 
     public function deactive() {
         global $wpdb;
-//        $content = file_get_contents($this->pluginPath . 'install/uninstall.sql');
-//        $content = str_replace('axcoto_', $wpdb->prefix, $content);
-//        $content = explode(';', $content);
-//        foreach ($content as $sql) {
-//            $wpdb->query(trim($sql));
-//        }
     }
 
     /**
