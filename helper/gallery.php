@@ -10,6 +10,7 @@ class WfalbumHelperGallery {
     static protected $_plugins = array();
     static protected $_drivers = array();
     static protected $_insNum = 0;
+
     /**
      * Load all gallery plugins!
      * Each gallery plugin must have a bootstrap method since they implement iWfalbumHelperGallery
@@ -78,7 +79,7 @@ class WfalbumHelperGallery {
 
         $album_id = WfalbumHelperCore::g($atts['id'], null);
         $theme = WfalbumHelperCore::g($atts['theme'], 'galleria');
-        
+
         $classname = 'WfalbumHelperGallery' . ucfirst($theme);
         if (!class_exists($classname)) {
             //fallback to default plugin
@@ -96,16 +97,55 @@ class WfalbumHelperGallery {
                 if (!empty($atts['pref'])) {
                     $_plugInOpts = explode(' ', $atts['pref']);
                     foreach ($_plugInOpts as $value) {
-                        $value=explode('=', $value, 2);
+                        $value = explode('=', $value, 2);
                         $plugInOpts[$value[0]] = $value[1];
                     }
                 } else {
                     $plugInOpts = array();
                 }
 
+                self::$_insNum++;
                 return self::$_drivers[$theme]->render($photos, $plugInOpts);
             }
         }
+    }
+
+    /**
+     * Sanitize an option array into string!
+     * Input like :
+     * array(
+     *  'boxCols' =>
+     * )
+     * @param array $option for ex: array(
+     *      'boxCols' => 10,
+     *      'efect' => 'random',
+     *      ...
+     *  )
+     * @param array $maps a map of values to replace
+     *          For example: 'effect' => 'This is an effect value'
+     * and map can be:
+     * array(
+     *  'This is an effect value' => 'this is a replace value'
+     * )
+     * @return 
+     *  *string like:
+     *      'boxCols':10, 'effect':'random'
+     *      If a value is boolean or numetic, the quote around it will be ommited!
+     *  *boolean if invalid arguments
+     */
+    static protected function _sanitizeOption($option, $maps=array()) {
+        $sanitizeString = array();
+        if (!is_array($option)) {
+            return false;
+        }
+        foreach ($option as $optName => $optVal) {
+            if ($optVal == 'false' || $optVal == 'true' || is_numeric($optVal)) {
+                $sanitizeString[] = "$optName:$optVal";
+            } else {
+                $sanitizeString[] = "$optName:'$optVal'";
+            }
+        }
+        return $sanitizeString ? implode(',', $sanitizeString) : '';
     }
 
     static public function field($type, $label, $name, $value=NULL, $attb=array()) {
@@ -189,5 +229,5 @@ interface iWfalbumHelperGallery {
      */
     static function preference();
 
-    function render($photo, $atts=NULL);
+    function render($photo, $atts=NULL, $optString=NULL);
 }
