@@ -82,7 +82,6 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
         if (is_array($atts)) {
             $options = array();
             foreach ($atts as $optName => $optVal) {
-                echo $optVal, ' ';
                 if ($optVal == 'false' || $optVal == 'true' || is_numeric($optVal)) {
                     $options[] = "$optName:$optVal";
                 } else {
