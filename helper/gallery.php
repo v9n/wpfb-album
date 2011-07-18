@@ -105,7 +105,11 @@ class WfalbumHelperGallery {
                 }
 
                 self::$_insNum++;
-                return self::$_drivers[$theme]->render($photos, $plugInOpts);
+                ob_start();
+                self::$_drivers[$theme]->render($photos, $plugInOpts);
+                $html = ob_get_contents();
+                ob_end_clean();
+                return $html;
             }
         }
     }
@@ -131,12 +135,12 @@ class WfalbumHelperGallery {
      *  *string like:
      *      'boxCols':10, 'effect':'random'
      *      If a value is boolean or numetic, the quote around it will be ommited!
-     *  *boolean if invalid arguments
+     *  *NULL if invalid arguments or no option
      */
     static protected function _sanitizeOption($option, $maps=array()) {
         $sanitizeString = array();
-        if (!is_array($option)) {
-            return false;
+        if (!is_array($option) || count($option)==0) {
+            return NULL;
         }
         foreach ($option as $optName => $optVal) {
             if ($optVal == 'false' || $optVal == 'true' || is_numeric($optVal)) {
@@ -229,5 +233,5 @@ interface iWfalbumHelperGallery {
      */
     static function preference();
 
-    function render($photo, $atts=NULL, $optString=NULL);
+    function render($photo, $atts=NULL);
 }
