@@ -54,7 +54,6 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
     }
 
     public function render($photos, $atts=NULL) {
-        ob_start();
         $instance = 'wf_render_' . self::$_insNum;
         $defaultAtts = array(
             'width' => 500,
@@ -62,9 +61,7 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
             'theme' => 'theme-default'
         );
         $atts = array_merge($defaultAtts, $atts);
-        if (is_array($atts)) {
-            $options = self::_sanitizeOption($atts);
-        }
+        $options = self::_sanitizeOption($atts);
         ?>
         <style>
             #<?php echo $instance; ?>_wrap {
@@ -90,9 +87,6 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
             })(jQuery);
         </script>
         <?php
-        $content = ob_get_contents();
-        ob_end_clean();
-        return $content;
     }
 
 }
