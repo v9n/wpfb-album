@@ -87,7 +87,7 @@ ul.list li {display: inline-block;}
     border: 1px solid #F3F3F3;
     display: none;
     margin: 5px 0;
-    padding: 5px 0;
+    padding: 5px;
     border-radius: 3px;
     -moz-border-radius: 3px;
 }
@@ -95,7 +95,7 @@ ul.list li {display: inline-block;}
 .wf_option_panel input[type="text"] {
     width: 50px;
 }
-.wf_option_panel .wf_pref_item {width: 250px;}
+.wf_option_panel .wf_pref_item {width: 405px; text-align: left; float: left}
 
 /*hack galleria error*/
 .galleria-lightbox-content .galleria-image img, .galleria-lightbox-content .galleria-lightbox-info {opacity: 1 !important;}
