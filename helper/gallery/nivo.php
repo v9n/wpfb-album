@@ -4,7 +4,7 @@
  *  by Vincent Nguyen <info@axcoto.com>
  */
 
-class WfalbumHelperGalleryNivo extends WfalbumHelperGallery {
+class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumHelperGallery {
 
     static public function info() {
         return array(
@@ -28,14 +28,18 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery {
     static function preference() {
         ?>
         <div class="wf_pref_item"><?php self::field('select', 'Theme', 'theme', array('theme-default' => 'Default', 'theme-pascal' => 'Pascal', 'theme-orman' => 'Orman', 'theme-orman' => 'Orman')); ?></div>
-        <div class="wf_pref_item"><?php self::field('select', 'Effect', 'effect', array(
+        <div class="wf_pref_item"><?php
+        self::field('select', 'Effect', 'effect', array(
             'sliceDown', 'sliceDownLeft', 'sliceUp', 'sliceUpLeft', 'sliceUpDown', 'sliceUpDownLeft', 'fold', 'fade', 'random', 'slideInRight', 'slideInLeft', 'slideInLeft', 'boxRain', 'boxRandom', 'boxRain', 'boxRainReverse', 'boxRainGrow', 'boxRainGrowReverse'
-        )); ?></div>
+        ));
+        ?></div>
+        <div class="wf_pref_item"><?php self::field('text', 'Width', 'width'); ?></div>
+        <div class="wf_pref_item"><?php self::field('text', 'height', 'height'); ?></div>
         <div class="wf_pref_item"><?php self::field('text', 'Slice', 'slice'); ?></div>
         <div class="wf_pref_item"><?php self::field('text', 'Box Columns', 'boxCols'); ?></div>
         <div class="wf_pref_item"><?php self::field('text', 'Box Rows', 'boxRows'); ?></div>
         <div class="wf_pref_item"><?php self::field('text', 'Slide transition speed', 'animSpeed'); ?></div>
-        <div class="wf_pref_item"><?php self::field('text', 'How long each slide will show', 'pauseTime'); ?></div>
+        <div class="wf_pref_item"><?php self::field('text', 'How long each slide will show (in ms)', 'pauseTime'); ?></div>
         <div class="wf_pref_item"><?php self::field('checkbox', 'Hide Direction Nav', 'directionNav', false); ?></div>
         <div class="wf_pref_item"><?php self::field('checkbox', 'Hide Direction Nav on Hover', 'directionNavHide', false); ?></div>
         <div class="wf_pref_item"><?php self::field('checkbox', 'Hide Control Nav', 'controlNav', false); ?></div>
@@ -49,10 +53,15 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery {
         <?php
     }
 
-    public function render() {
-        static $i = 0;
-        $i++;
-        $instance = 'wf_render_' . $i;
+    public function render($photos, $atts=NULL) {
+        self::$_insNum++;
+        $instance = 'wf_render_' . self::$_insNum;
+        $defaultAtts = array(
+            'width' => 500,
+            'height' => 400,
+            'theme' => 'theme-default'
+        );
+        $atts = array_merge($defaultAtts, $atts);
         if (is_array($atts)) {
             $options = array();
             foreach ($atts as $optName => $optVal) {
@@ -66,7 +75,13 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery {
             $options = $options ? implode(", ", $options) : '';
         }
         ?>
-        <div class="slider-wrapper theme-default">
+        <style>
+            #<?php echo $instance ?>_wrap {
+                width: <?php echo $atts['width'] ?>px; /* Change this to your images width */
+                height: <?php echo $atts['height'] ?>px; /* Change this to your images height */   
+            }
+        </style>
+        <div class="slider-wrapper <?php echo $atts['theme'] ?>" id="<?php echo $instance?>_wrap">
             <div class="ribbon"></div>
 
             <div id="<?php echo $instance ?>" class="nivoSlider">
