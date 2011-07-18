@@ -22,7 +22,7 @@
                     <a class="button wf-back">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;                    
                     <label>Choose an album display mode, define preference, then insert</label>
                     <select name="plugin" id="wf-plugin">
-                        <option value="0">Album Display Mode</option>
+                        <option value="0" selected="selected">Choose Display Mode</option>
                         <?php
                         foreach (WfalbumHelperGallery::getPlugins() as $plugin) :
                             ?>
