@@ -95,7 +95,7 @@ class WfalbumHelperFb {
             Axche::remove('album_' . get_current_user_id(), 'wfalbum');
         }
         if (!($albums = Axche::get('album_' . get_current_user_id(), 'wfalbum'))) {
-            WfalbumHelperCore::log('album_' . get_current_user_id(), 'wfalbum' . ' not in cache');
+            WfalbumHelperCore::log('album_' . get_current_user_id() . 'wfalbum' . ' not in cache');
             $token = WfalbumHelperCore::getFbToken();
             if ($token && count($token) == 2) {
                 $albums = $this->getApi()->api($token[0] . '/albums', 'GET', array('access_token' => $token[1]));
@@ -113,7 +113,7 @@ class WfalbumHelperFb {
         }
 
         if (!($photos = Axche::get('album_' . $album_id, 'wfalbum'))) {
-            WfalbumHelperCore::log('album_' . $album_id, 'wfalbum' . ' not in cache');
+            WfalbumHelperCore::log('album_' . $album_id . 'wfalbum' . ' not in cache');
             $token = WfalbumHelperCore::getFbToken();
             if ($token && count($token) == 2) {
                 $photos = $this->getApi()->api($album_id . '/photos', 'GET', array('access_token' => $token[1]));
@@ -131,7 +131,7 @@ class WfalbumHelperFb {
         }
 
         if (!($photo = Axche::get('photo_' . $photo_id, 'wfalbum'))) {
-            WfalbumHelperCore::log('photo_' . $photo_id, 'wfalbum' . ' not in cache');
+            WfalbumHelperCore::log('photo_' . $photo_id . 'wfalbum' . ' not in cache');
             $token = WfalbumHelperCore::getFbToken();
             if ($token && count($token) == 2) {
                 $photo = $this->getApi()->api($photo_id, 'GET', array('access_token' => $token[1]));
