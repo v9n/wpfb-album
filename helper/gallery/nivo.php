@@ -27,14 +27,14 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
      */
     static function preference() {
         ?>
+        <div class="wf_pref_item"><?php self::field('text', 'Width', 'width'); ?></div>
+        <div class="wf_pref_item"><?php self::field('text', 'height', 'height'); ?></div>
         <div class="wf_pref_item"><?php self::field('select', 'Theme', 'theme', array('theme-default' => 'Default', 'theme-pascal' => 'Pascal', 'theme-orman' => 'Orman', 'theme-orman' => 'Orman')); ?></div>
         <div class="wf_pref_item"><?php
         self::field('select', 'Effect', 'effect', array(
             'sliceDown', 'sliceDownLeft', 'sliceUp', 'sliceUpLeft', 'sliceUpDown', 'sliceUpDownLeft', 'fold', 'fade', 'random', 'slideInRight', 'slideInLeft', 'slideInLeft', 'boxRain', 'boxRandom', 'boxRain', 'boxRainReverse', 'boxRainGrow', 'boxRainGrowReverse'
         ));
         ?></div>
-        <div class="wf_pref_item"><?php self::field('text', 'Width', 'width'); ?></div>
-        <div class="wf_pref_item"><?php self::field('text', 'height', 'height'); ?></div>
         <div class="wf_pref_item"><?php self::field('text', 'Slice', 'slice'); ?></div>
         <div class="wf_pref_item"><?php self::field('text', 'Box Columns', 'boxCols'); ?></div>
         <div class="wf_pref_item"><?php self::field('text', 'Box Rows', 'boxRows'); ?></div>
@@ -81,7 +81,7 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
                 height: <?php echo $atts['height'] ?>px; /* Change this to your images height */   
             }
         </style>
-        <div class="slider-wrapper <?php echo $atts['theme'] ?>" id="<?php echo $instance?>_wrap">
+        <div class="slider-wrapper <?php echo $atts['theme'] ?>" id="<?php echo $instance ?>_wrap">
             <div class="ribbon"></div>
 
             <div id="<?php echo $instance ?>" class="nivoSlider">
