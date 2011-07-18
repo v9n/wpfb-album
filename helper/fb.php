@@ -62,7 +62,7 @@ class WfalbumHelperFb {
             'scope' => 'user_photos,offline_access',
             'canvas' => array(
                 'url' => 'http://cc.axcoto.com/wpfb-bridge/', //$option['fbapp_canvas_url'] . '/',
-                'page' => 'https://apps.facebook.com/wpfbalbum/',
+                'page' => 'http://apps.facebook.com/wpfbalbum/',
             )
         );
     }
