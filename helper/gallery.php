@@ -139,7 +139,7 @@ class WfalbumHelperGallery {
      */
     static protected function _sanitizeOption($option, $maps=array()) {
         $sanitizeString = array();
-        if (!is_array($option) || count($option)==0) {
+        if (!is_array($option) || count($option) == 0) {
             return NULL;
         }
         foreach ($option as $optName => $optVal) {
