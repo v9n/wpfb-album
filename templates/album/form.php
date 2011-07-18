@@ -8,9 +8,10 @@
                         <img  src="<?php echo $wpfb_album->pluginUrl ?>assets/images/spin.gif" alt="Loading..." />
                     </div>
                 </div>
+                
                 <div class="clear"></div>
                 <div class="wf-control">
-                    <a class="button" href="#" id="wf-clear-cache">Clear Cache</a>
+                    <a class="button" href="#" id="wf-clear-cache">Refresh</a>
                     &nbsp;&nbsp;&nbsp;
                     <a class="button wf-next">Next</a>
                 </div>
