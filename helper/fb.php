@@ -73,11 +73,16 @@ class WfalbumHelperFb {
      */
     public function getApi() {
         if (empty($this->_api)) {
-            $this->_api = new Facebook(array(
-                        'appId' => $this->conf['core']['id'],
-                        'secret' => $this->conf['core']['secret'],
-                        'cookie' => true,
-                    ));
+            try {
+                $this->_api = new Facebook(array(
+                            'appId' => $this->conf['core']['id'],
+                            'secret' => $this->conf['core']['secret'],
+                            'cookie' => true,
+                        ));
+            } catch (Exception $e) {
+                $msg = $e->getMessage();
+                WfalbumHelperCore::log($msg);
+            }
         }
         return $this->_api;
     }
