@@ -43,6 +43,7 @@
                             <form id="wf_prep_form_<?php echo $plugin['id'] ?>">
                                 <?php do_action('wfalbum_plugin_' . $plugin['id']); ?>
                             </form>
+                            <div class="clear"></div>
                         </div>
                         <?php
                     endforeach
