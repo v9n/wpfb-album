@@ -33,7 +33,7 @@ class WfalbumHelperFb {
      * @return <string> authenticate url
      */
     public function getAuthUrl() {
-        $url = "http://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s&scope=";
+        $url = "http://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s&scope=%s";
         $redirect_url = $this->conf['canvas']['page'] . '?domain=' . get_bloginfo('url') . '&uid=' . get_current_user_id();
         return sprintf($url, $this->conf['core']['id'], urlencode($redirect_url), $this->conf['scope']);
         //return "http://www.facebook.com/dialog/oauth?client_id=" . $this->conf['core']['id'] . "&redirect_uri=" . urlencode($this->conf['canvas']['page']) . '&scope=' . $this->conf['scope'];

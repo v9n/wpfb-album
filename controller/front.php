@@ -29,6 +29,7 @@ class WfalbumFrontController {
         global $wpfb_album;
         global $post;
         global $wpdb;
+        
         $fb = WfalbumHelperCore::load('fb', true);
         $cache = WfalbumHelperCore::g($_REQUEST['force'], 0) == 0;
         if (!$token = WfalbumHelperCore::getFbToken()) {

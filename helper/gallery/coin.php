@@ -44,6 +44,7 @@ class WfalbumHelperGalleryCoin extends WfalbumHelperGallery {
     }
 
     public function render($photos, $atts=NULL) {
+        ob_start();
         self::$_insNum++;
         $instance = 'wf_render_' . self::$_insNum;
         $defaultAtts = array(
@@ -66,7 +67,7 @@ class WfalbumHelperGalleryCoin extends WfalbumHelperGallery {
         ?>
         <div id="<?php echo $instance ?>" class="nivoSlider">
             <?php foreach ($photos['data'] as $photo) : ?>   
-            <a href="<?php echo $photo['images'][0]['source'] ?>" target="_blank">
+                <a href="<?php echo $photo['images'][0]['source'] ?>" target="_blank">
                     <img alt="<?php echo esc_attr(WfalbumHelperCore::g($photo['name'])); ?>" src="<?php echo $photo['images'][0]['source'] ?>" />
                     <span><?php echo esc_attr(WfalbumHelperCore::g($photo['name'])); ?></span>
                 </a>
@@ -82,6 +83,9 @@ class WfalbumHelperGalleryCoin extends WfalbumHelperGallery {
             })(jQuery);
         </script>
         <?php
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
     }
 
 }

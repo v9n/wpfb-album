@@ -76,7 +76,8 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
         <?php
     }
 
-    public function render($photos, $atts=NULL) {
+    public function render($photos, $atts=NULL, $optString=NULL) {
+        ob_start();
         self::$_insNum++;
         $instance = 'wf_render_' . self::$_insNum;
         if (is_array($atts)) {
@@ -109,6 +110,9 @@ class WfalbumHelperGalleryGalleria extends WfalbumHelperGallery implements iWfal
             })(jQuery);
         </script>
         <?php
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
     }
 
 }

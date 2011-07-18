@@ -99,7 +99,7 @@ window.wfapp = {};
                 shortcode.push(pro.join('')); 
             }
                                         
-            shortcode =  ['[','wfalbum ', shortcode.join(" "), ']'].join('');
+            shortcode =  ['<div class="wf_wrap">', '[','wfalbum ', shortcode.join(" "), ']', '</div>'].join('');
             var wdw = window.dialogArguments || opener || parent || top;
             wdw.send_to_editor(shortcode);
             $.colorbox.close();

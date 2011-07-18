@@ -89,7 +89,6 @@ class WfalbumHelperGallery {
             //Load photo of album then pass to driver
             $photos = $fb->getPhotos($album_id);
             if ($photos['data']) {
-                echo $classname;
                 //Load corresponding driver for render
                 if (empty(self::$_drivers[$theme])) {
                     self::$_drivers[$theme] = new $classname();

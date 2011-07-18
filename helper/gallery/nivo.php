@@ -54,6 +54,7 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
     }
 
     public function render($photos, $atts=NULL) {
+        ob_start();
         self::$_insNum++;
         $instance = 'wf_render_' . self::$_insNum;
         $defaultAtts = array(
@@ -98,6 +99,9 @@ class WfalbumHelperGalleryNivo extends WfalbumHelperGallery implements iWfalbumH
             })(jQuery);
         </script>
         <?php
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
     }
 
 }
