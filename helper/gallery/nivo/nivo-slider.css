@@ -57,7 +57,7 @@
 }
 .nivo-caption p {
 	padding:5px;
-	margin:0;
+	margin: 0 !important;
 }
 .nivo-caption a {
 	display:inline !important;
