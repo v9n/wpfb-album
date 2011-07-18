@@ -44,8 +44,6 @@ class WfalbumHelperGalleryCoin extends WfalbumHelperGallery {
     }
 
     public function render($photos, $atts=NULL) {
-        ob_start();
-        self::$_insNum++;
         $instance = 'wf_render_' . self::$_insNum;
         $defaultAtts = array(
             'width' => 500,
@@ -53,17 +51,7 @@ class WfalbumHelperGalleryCoin extends WfalbumHelperGallery {
             'effect' => 'random'
         );
         $atts = array_merge($defaultAtts, $atts);
-        if (is_array($atts)) {
-            $options = array();
-            foreach ($atts as $optName => $optVal) {
-                if ($optVal == 'false' || $optVal == 'true' || is_numeric($optVal)) {
-                    $options[] = "$optName:$optVal";
-                } else {
-                    $options[] = "$optName:'$optVal'";
-                }
-            }
-            $options = $options ? implode(", ", $options) : '';
-        }
+        $options = self::_sanitizeOption($atts);
         ?>
         <div id="<?php echo $instance ?>" class="nivoSlider">
             <?php foreach ($photos['data'] as $photo) : ?>   
@@ -83,9 +71,6 @@ class WfalbumHelperGalleryCoin extends WfalbumHelperGallery {
             })(jQuery);
         </script>
         <?php
-        $content = ob_get_contents();
-        ob_end_clean();
-        return $content;
     }
 
 }
