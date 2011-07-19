@@ -15,7 +15,7 @@
             };
             ?>
             <li>
-                <a href="<?php echo $photo['images'][0]['source'] ?>" rel="<?php echo $this->id ?>">
+                <a style="width: <?php echo $instance['width']?>px; height: <?php echo $instance['height']?>px; " href="<?php echo $photo['images'][0]['source'] ?>" rel="<?php echo $this->id ?>">
                     <img src="<?php echo $photo['images'][3]['source'] ?>" />
                 </a>
             </li>
