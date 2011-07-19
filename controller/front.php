@@ -29,7 +29,7 @@ class WfalbumFrontController {
         global $wpfb_album;
         global $post;
         global $wpdb;
-        
+
         $fb = WfalbumHelperCore::load('fb', true);
         $cache = WfalbumHelperCore::g($_REQUEST['force'], 0) == 0;
         if (!$token = WfalbumHelperCore::getFbToken()) {
@@ -37,20 +37,22 @@ class WfalbumFrontController {
         } else {
             $albums = $fb->getAlbums(NULL, $cache);
             $count = 0;
-            foreach ($albums['data'] as $keys => $album) {
-                $album_cover = $fb->getPhoto($album['cover_photo'], $cache);
-                foreach ($album_cover['images'] as $image) {
-                    if ($image['width'] == 180) {
-                        $album_cover = $image;
-                        break;
+            if (is_array($albums['data'])) {
+                foreach ($albums['data'] as $keys => $album) {
+                    $album_cover = $fb->getPhoto($album['cover_photo'], $cache);
+                    foreach ($album_cover['images'] as $image) {
+                        if ($image['width'] == 180) {
+                            $album_cover = $image;
+                            break;
+                        }
                     }
+                    ?>
+                    <div class="wfalbum_item" id="wfalbum_item_<?php echo $album['id'] ?>" rel="<?php echo $album['id'] ?>">
+                        <a title="" href='#'><img src='<?php echo $album_cover['source'] ?>' border='0' alt="" title="" /></a>
+                        <span><?php echo $album['name'] ?> // <?php echo $album['count'] ?> photos</span>
+                    </div>
+                    <?php
                 }
-                ?>
-                <div class="wfalbum_item" id="wfalbum_item_<?php echo $album['id'] ?>" rel="<?php echo $album['id'] ?>">
-                    <a title="" href='#'><img src='<?php echo $album_cover['source'] ?>' border='0' alt="" title="" /></a>
-                    <span><?php echo $album['name'] ?> // <?php echo $album['count'] ?> photos</span>
-                </div>
-                <?php
             }
         }
     }
