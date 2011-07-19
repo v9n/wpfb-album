@@ -62,6 +62,7 @@ class WfalbumActionCore {
      */
     public static function shutdown() {
         ob_end_flush();
+        include $wpfb_album->pluginPath . 'templates/widget/album/supersized.php';
     }
 
     /**
