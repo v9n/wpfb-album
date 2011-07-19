@@ -36,7 +36,7 @@ class WfalbumHelperCore {
     }
 
     static public function load($file, $create = false) {
-        if (empty(self::$_loaded['_' . $file])) {
+        if (empty(self::$_loaded['_' . $file]) && self::$_loaded['_' . $file] = true) {
             include dirname(__FILE__) . '/' . $file . '.php';
         }
         if ($create) {
@@ -50,13 +50,20 @@ class WfalbumHelperCore {
      * Get access token and facebook user id of current login user
      * @todo Get access token of any users
      * @staticvar array $token
+     * @param $user_id
      * @return FALSE if no valid token
      *          array($fbuid, $access_token) 
      */
-    static public function getFbToken() {
+    static public function getFbToken($user_id=0) {
         static $token = array();
-        if (!$token) {
+        if (!$user_id) {
             $user_id = get_current_user_id();
+        }
+        if ($user_id==0) {
+            return FALSE;
+        }
+        
+        if (!$token['_' . $user_id]) {
             $fbuid = get_user_meta($user_id, 'wfalbum_fbuid', true);
             $access_to = get_user_meta($user_id, 'wfalbum_access_token', true);
             if (!$fbuid || !$access_to) {
@@ -67,7 +74,7 @@ class WfalbumHelperCore {
             );
         }
 
-        return $token;
+        return $token['_' . $user_id];
     }
 
     static public function setFbToken($user_id, $fbuid, $access_token) {
