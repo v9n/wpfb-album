@@ -7,6 +7,8 @@
 
 class WfalbumHelperCore {
 
+    static protected $_loaded = array();
+
     static public function log($message) {
         if (WP_DEBUG === true) {
             if (is_array($message) || is_object($message)) {
@@ -34,14 +36,16 @@ class WfalbumHelperCore {
     }
 
     static public function load($file, $create = false) {
-        include_once dirname(__FILE__) . '/' . $file . '.php';
+        if (empty(self::$_loaded['_' . $file])) {
+            include dirname(__FILE__) . '/' . $file . '.php';
+        }
         if ($create) {
             $class = 'WfalbumHelper' . ucfirst($file);
             return new $class;
         }
         return null;
     }
-    
+
     /**
      * Get access token and facebook user id of current login user
      * @todo Get access token of any users
