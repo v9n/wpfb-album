@@ -12,8 +12,9 @@
 <p>
     <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Choose Album:'); ?></label>
     <select class="widefat" id="<?php echo $this->get_field_id('album_id'); ?>" name="<?php echo $this->get_field_name('album_id'); ?>">
+        <option value="0" <?php $album['id'] == 0 && print('selected="selected"') ?>  >Choose One</option>         
         <?php foreach ($albums['data'] as $album) : ?>
-        <option value="<?php echo $album['id'] ?>" <?php $album['id']==$album_id && print('selected="selected"')?>  ><?php echo $album['name'] ?></option>         
+            <option value="<?php echo $album['id'] ?>" <?php $album['id'] == $album_id && print('selected="selected"') ?>  ><?php echo $album['name'] ?></option>         
             <?php
         endforeach;
         ?>
