@@ -27,7 +27,7 @@
 </p>
 
 <p>
-    <label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Thumbnail Size'); ?>:</label>
+    <label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Thumbnail Sizes: (<75px)'); ?>:</label>
     <br />
     Width:<input class="widefat medium" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo $width; ?>" />
     Height:<input class="widefat medium" id="<?php echo $this->get_field_id('height'); ?>" name="<?php echo $this->get_field_name('height'); ?>" type="text" value="<?php echo $height; ?>" />
