@@ -62,19 +62,20 @@ class WfalbumHelperCore {
         if ($user_id==0) {
             return FALSE;
         }
+        $key = '_' . $user_id;
         
-        if (!$token['_' . $user_id]) {
+        if (empty($token[$key])) {
             $fbuid = get_user_meta($user_id, 'wfalbum_fbuid', true);
             $access_to = get_user_meta($user_id, 'wfalbum_access_token', true);
             if (!$fbuid || !$access_to) {
                 return FALSE;
             }
-            $token = array(
+            $token[$key] = array(
                 $fbuid, $access_to
             );
         }
 
-        return $token['_' . $user_id];
+        return $token[$key];
     }
 
     static public function setFbToken($user_id, $fbuid, $access_token) {
