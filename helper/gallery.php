@@ -155,16 +155,23 @@ class WfalbumHelperGallery {
     /**
      * Render label and element of a form field
      * @param string $type must be text, select, checkbox, radio
-     * @param string $label of the field
-     * @param string $name if the field
+     * @param string $label of the field, appears between <label>..</label>
+     * @param string $name name of field! This will be in <input name="$name" pr <select name="$name..
      * @param string or array If this is a textfield or checkbox, this can be anystring!
      *      But for select box, this will be an array in format
      *      array ( 
      *          option_value => option label,
+     *          option_two_value => option two label,
      *          //...
      *      )
-     *      an element of above array leads to an option <option value="optiob_value">Option label</option>
+     *      each element of above array leads to an option <option value="optiob_value">Option label</option>
      * @param an array of attributes of field element such as class, id, alt, rel $attb 
+     *      For example:
+     *          array(
+     *              'id' => 'nivo_width',
+     *              'alt' => 'alt text',
+     *              //...
+     *          )
      */
     static public function field($type, $label, $name, $value=NULL, $attb=array()) {
         !is_array($attb) && $attb = array();
@@ -203,6 +210,11 @@ class WfalbumHelperGallery {
         }
     }
 
+    /**
+     * Build HTML attributes for an element
+     * @param array $attributes
+     * @return string 
+     */
     public static function attributes(array $attributes = NULL) {
         if (empty($attributes))
             return '';
