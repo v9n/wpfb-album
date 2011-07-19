@@ -35,7 +35,7 @@
 <p>
     <label for="<?php echo $this->get_field_id('mode'); ?>"><?php _e('Display Type:'); ?></label>
     <select class="widefat" id="<?php echo $this->get_field_id('mode'); ?>" name="<?php echo $this->get_field_name('mode'); ?>" >
-        <option <?php ($mode == 'colorbox') && print('selected="selected"'); ?>  value="colorbox">Colorbox</option>
-        <option <?php ($mode == 'supersize') && print('selected="selected"'); ?>  value="supersize">Supersized!</option>
+        <option <?php ($mode == 'normal') && print('selected="selected"'); ?>  value="normal">Normal</option>
+        <option <?php ($mode == 'fullscreen') && print('selected="selected"'); ?>  value="fullscreen">Full Screen</option>
     </select>
 </p>
