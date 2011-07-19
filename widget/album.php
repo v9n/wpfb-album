@@ -8,11 +8,12 @@
 class WfalbumWidgetAlbum extends WP_Widget {
 
     protected $_defaultSetting = array(
-        'title' => 'Facebook Album',
+        'title' => 'My Facebook Album',
         'quantity' => 20,
-        'type' => 'colorbox',
-        'width' => 250,
-        'height' => 500,
+        'mode' => 'normal',
+        'width' => 50,
+        'height' => 50,
+        'album_id' => 0,
     );
 
     function _isRoot() {
@@ -35,7 +36,7 @@ class WfalbumWidgetAlbum extends WP_Widget {
             echo 'Sorry, just root admin is alow to use this';
             return false;
         }
-
+        $instance = array_merge($this->_defaultSetting, $instance);
         $fb = WfalbumHelperCore::load('fb', true);
         if (!$token = WfalbumHelperCore::getFbToken()) {
             include $wpfb_album->pluginPath . 'templates/auth.php';
