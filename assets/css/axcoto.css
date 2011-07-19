@@ -120,7 +120,8 @@ ul.list li {display: inline-block;}
 
 /**Widget Side*/
 .wfalbum_widget {}
-.wfalbum_widget li {display: inline-block; width: 50px; height: 50px; border: 1px solid #888; }
-.wfalbum_widget a {display: inline-block; overflow: hidden;}
+.wfalbum_widget li {display: inline-block; border: 1px solid #888; padding: 2px;}
+.wfalbum_widget li:hover {box-shadow: 0 0 2px #999999; opacity: 0.9}
+.wfalbum_widget a {display: block; overflow: hidden;}
 .wfalbum_widget img {display: block; }
 .widefat.medium { width: 20%}
