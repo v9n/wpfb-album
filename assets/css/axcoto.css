@@ -116,3 +116,10 @@ ul.list li {display: inline-block;}
 
 /*hack galleria error*/
 .galleria-lightbox-content .galleria-image img, .galleria-lightbox-content .galleria-lightbox-info {opacity: 1 !important;}
+
+
+/**Widget Side*/
+.wfalbum_widget {}
+.wfalbum_widget li {display: inline-block; width: 50px; height: 50px; border: 1px solid #888; }
+.wfalbum_widget a {display: inline-block; overflow: hidden;}
+.wfalbum_widget img {display: block; }
