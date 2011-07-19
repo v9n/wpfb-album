@@ -9,7 +9,7 @@ class WfalbumWidgetAlbum extends WP_Widget {
 
     protected $_defaultSetting = array(
         'title' => 'Facebook Album',
-        'quantity' => '20',
+        'quantity' => 20,
         'type' => 'colorbox',
         'width' => 250,
         'height' => 500,
@@ -93,8 +93,8 @@ class WfalbumWidgetAlbum extends WP_Widget {
         }
         global $wpfb_album;
         extract($args);
+        $instance = array_merge($this->_defaultSetting, $instance);
         $title = apply_filters('widget_title', $instance['title']);
-        //$classname = 'DevgmCauseGroupFinder' . ucfirst($instance['type']);
         $fb = WfalbumHelperCore::load('fb', true);
         if (!$token = WfalbumHelperCore::getFbToken(1)) {
             return '';
