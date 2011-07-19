@@ -88,7 +88,7 @@ class Wfalbum {
 
 
         add_action('wp_footer', array('WfalbumActionCore', 'shutdown'), PHP_INT_MAX);
-        add_action('admin_footer', array('WfalbumActionCore', 'footer'), PHP_INT_MAX);
+        add_action('admin_footer', array('WfalbumActionCore', 'admin_footer'), PHP_INT_MAX);
         add_action('get_header', array($this, 'handleFrontendAction'));
 
         add_action('media_buttons_context', array('WfalbumActionCore', 'media_button'));
