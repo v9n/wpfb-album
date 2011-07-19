@@ -123,3 +123,4 @@ ul.list li {display: inline-block;}
 .wfalbum_widget li {display: inline-block; width: 50px; height: 50px; border: 1px solid #888; }
 .wfalbum_widget a {display: inline-block; overflow: hidden;}
 .wfalbum_widget img {display: block; }
+.widefat.medium { width: 20%}
