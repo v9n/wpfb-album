@@ -210,10 +210,22 @@ class Wfalbum {
         return self::$_self;
     }
 
+    /**
+     * Useful when using in admin! Can be used in Menu
+     * This is designed specially for control>action model of this plugin
+     * @param string $page
+     * @param string $uri
+     * @return string 
+     */
     public function uri($page, $uri) {
         return 'admin.php?page=Wfalbum/' . $page . '&uri=Wfalbum/' . $uri;
     }
-
+    
+    /**
+     * Return an absolute URL of a file in plugin folder
+     * @param String $file
+     * @return String 
+     */
     public function url($file) {
         return $this->pluginUrl . $file;
     }
