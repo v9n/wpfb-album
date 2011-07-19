@@ -10,15 +10,19 @@ class WfalbumWidgetAlbum extends WP_Widget {
     protected $_defaultSetting = array(
         'title' => 'Facebook Album',
         'quantity' => '20',
-        'type' => 'fancy',
+        'type' => 'colorbox',
+        'width' => 250,
+        'height' => 500,
     );
-    
+
+    function _isRoot() {
+        return get_current_user_id() == 1;
+    }
+
     function __construct() {
         $widget_ops = array('classname' => 'WfalbumWidgetAlbum', 'description' => __('Display Facebook Albums'));
         parent::__construct('Wfalbum_album', __('FaceBook Album'), $widget_ops);
     }
-    
-    
 
     /**
      * Render setting form of widget
@@ -27,15 +31,29 @@ class WfalbumWidgetAlbum extends WP_Widget {
      */
     function form($instance) {
         global $wpfb_album;
-        if (!current_user_can('manage_option')) {
-            echo 'Sorry, just admin is alow to use this';
+        if (!$this->_isRoot()) {
+            echo 'Sorry, just root admin is alow to use this';
             return false;
         }
-        // outputs the options form on admin
-        $title = esc_attr($instance['title']);
-        $quantity = esc_attr($instance['quantity']);
-        $type = esc_attr($instance['type']);
-        include Wfalbum::singleton()->pluginPath . '/templates/widget/album/form.php';
+
+        $fb = WfalbumHelperCore::load('fb', true);
+        if (!$token = WfalbumHelperCore::getFbToken()) {
+            include $wpfb_album->pluginPath . 'templates/auth.php';
+            return false;
+        }
+        $albums = $fb->getAlbums();
+        if (is_array($albums) && count($albums['data'])) {
+            // outputs the options form on admin
+            $title = esc_attr($instance['title']);
+            $quantity = esc_attr($instance['quantity']);
+            $width = esc_attr($instance['width']);
+            $height = esc_attr($instance['height']);
+            $album_id = esc_attr($instance['album_id']);
+            $mode = esc_attr($instance['mode']);
+            include Wfalbum::singleton()->pluginPath . '/templates/widget/album/form.php';
+        } else {
+            echo 'No Albums';
+        }
     }
 
     /**
@@ -45,8 +63,8 @@ class WfalbumWidgetAlbum extends WP_Widget {
      * @global Wfalbum $wpfb_album
      */
     function update($new_instance, $old_instance) {
-        if (!current_user_can('manage_option')) {
-            echo 'Sorry, just admin is alow to use this';
+        if (!$this->_isRoot()) {
+            echo 'Sorry, just root admin is alow to use this';
             return false;
         }
 
@@ -55,7 +73,10 @@ class WfalbumWidgetAlbum extends WP_Widget {
         $instance = $old_instance;
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['quantity'] = strip_tags($new_instance['quantity']);
-        $instance['type'] = strip_tags($new_instance['type']);
+        $instance['mode'] = strip_tags($new_instance['mode']);
+        $instance['album_id'] = strip_tags($new_instance['album_id']);
+        $instance['width'] = strip_tags($new_instance['width']);
+        $instance['height'] = strip_tags($new_instance['height']);
         return $instance;
     }
 
@@ -66,14 +87,24 @@ class WfalbumWidgetAlbum extends WP_Widget {
      * @global Wfalbum $wpfb_album
      */
     function widget($args, $instance) {
+        if (!$this->_isRoot()) {
+            echo '';
+            return false;
+        }
         global $wpfb_album;
         extract($args);
         $title = apply_filters('widget_title', $instance['title']);
-        $classname = 'DevgmCauseGroupFinder' . ucfirst($instance['type']);
-        $finder = new $classname();
-        $groups = $finder->find(array('num' => $instance['quantity'], 'order' => $instance['order']));
-        include $wpfb_album->pluginPath . '/templates/widget/album/widget.php';
-        
+        //$classname = 'DevgmCauseGroupFinder' . ucfirst($instance['type']);
+        $fb = WfalbumHelperCore::load('fb', true);
+        if (!$token = WfalbumHelperCore::getFbToken(1)) {
+            return '';
+        }
+        $photos = $fb->getPhotos($instance['album_id']);
+        if (is_array($photos['data'])) {
+            include $wpfb_album->pluginPath . '/templates/widget/album/widget.php';
+        } else {
+            return '';
+        }
     }
 
 }
