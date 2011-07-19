@@ -246,9 +246,11 @@ class Wfalbum {
     );
     public $scripts = array(
         //src, depend, version, in footer, [admin|frontend]
-        //If set 5th element to admin or frontend it will autoload
+        //If set 5th element to admin or frontend it will autoload on only admin or frontend
+        //but set it to auto make it load on both of side
+        //otherwise, not load automatically
         'wfalbum-app-core' => array('assets/js/app.js', array('jquery'), '1.0.0', true, 'auto'),
-        'colorbox' => array('assets/js/colorbox/jquery.colorbox-min.js', array('jquery'), '1.0.0', true, 'admin'),
+        'colorbox' => array('assets/js/colorbox/jquery.colorbox-min.js', array('jquery'), '1.0.0', true, 'auto'),
     );
 
 }
