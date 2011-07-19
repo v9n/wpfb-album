@@ -152,6 +152,20 @@ class WfalbumHelperGallery {
         return $sanitizeString ? implode(',', $sanitizeString) : '';
     }
 
+    /**
+     * Render label and element of a form field
+     * @param string $type must be text, select, checkbox, radio
+     * @param string $label of the field
+     * @param string $name if the field
+     * @param string or array If this is a textfield or checkbox, this can be anystring!
+     *      But for select box, this will be an array in format
+     *      array ( 
+     *          option_value => option label,
+     *          //...
+     *      )
+     *      an element of above array leads to an option <option value="optiob_value">Option label</option>
+     * @param an array of attributes of field element such as class, id, alt, rel $attb 
+     */
     static public function field($type, $label, $name, $value=NULL, $attb=array()) {
         !is_array($attb) && $attb = array();
         $defaultAttb = array(
