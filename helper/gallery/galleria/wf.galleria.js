@@ -40,7 +40,7 @@ wfapp.fn.builder.galleria = function() {
         }
         
         if (value = $('input[name=lightbox]:checked', optionForm).length) {
-            prep['imagePan'] = true
+            prep['lightbox'] = true
         }
         
         if (value = $('input[name=showInfo]:checked', optionForm).length) {
