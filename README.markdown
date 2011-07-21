@@ -1,3 +1,3 @@
 # Personal Prj #
 
-This is going to use as my plugin template for next project at Axcoto!
+I must create this branch! This version requires user create his/her own facebook app instead of using my own facebook app!
